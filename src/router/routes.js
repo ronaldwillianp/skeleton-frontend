@@ -1,7 +1,15 @@
 // Define las rutas del proyecto y con cual layout se ejecutan
 const routes = [
+  // Landing Page
   {
     path: '/',
+    component: () => import('layouts/LandingPageLayout.vue'),
+    children: [
+      {path: '', component: () => import('pages/frontend/IndexPage.vue')}
+    ]
+  },
+  {
+    path: '/administracion',
     component: () => import('layouts/MainLayout.vue'),
 
     // * La siguiente linea es importante, indica que estas rutas requieren de authenticacion
