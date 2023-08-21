@@ -24,6 +24,8 @@ const routes = [
       {path: '/add-user', name: "add-user", meta: {groups: ['Administrador']}, component: () => import('pages/backend/user/AddUserPage.vue')},
       {path: '/edit-user/:id', name: "edit-user", meta: {groups: ['Administrador']}, component: () => import('pages/backend/user/EditUserPage.vue')},
 
+      // Gestion de Empresa
+      {path: '/empresas', name: "empresas", meta: {groups: ['Administrador']},component: () => import('pages/backend/empresa/EmpresaPage.vue')},
 
       {path: 'profile', name: "profile",meta: {groups: ['Administrador', 'Moderador', 'Consultor']}, component: () => import('pages/backend/user/ProfilePage.vue')},
       {path: 'prueba-ruta', name: "prueba-ruta", component: () => import('pages/backend/general/PruebaRuta.vue')},
