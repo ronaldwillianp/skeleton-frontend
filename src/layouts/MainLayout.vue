@@ -77,8 +77,9 @@
 
       <q-scroll-area class="fit">
         <q-list>
-          <div v-for="(menuItem, index) in menuList" :key="index" >
-            <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable active-class="text-primary" exact v-ripple :to="menuItem.path">
+          <div v-for="(menuItem, index) in menuList" :key="index">
+            <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable
+                    active-class="text-primary" exact v-ripple :to="menuItem.path">
               <q-item-section avatar>
                 <q-icon :name="menuItem.icon"/>
               </q-item-section>
@@ -131,126 +132,123 @@
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import {ref} from 'vue'
 import {UserStore} from "stores/user-store";
 import {useRouter} from "vue-router";
 
-export default {
-  setup() {
-    const leftDrawerOpen = ref(false)
-    const rightDrawerOpen = ref(false)
-    const useUserStore = UserStore()
-    const router = useRouter()
-    const menuList = [
-      {
-        icon: 'home',
-        label: 'Inicio',
-        separator: true,
-        path: '/',
-        groups: ['Administrador', 'Moderador', 'Consultor']
-      },
-      {
-        icon: 'manage_accounts',
-        label: 'Usuarios',
-        separator: false,
-        path: '/users',
-        groups: ['Administrador']
-      },
-      {
-        icon: 'house',
-        label: 'Empresas',
-        separator: false,
-        path: '/empresas',
-        groups: ['Administrador']
-      },
-      {
-        icon: 'delete',
-        label: 'Trash',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'error',
-        label: 'Spam',
-        separator: true,
-        groups: []
-      },
-      {
-        icon: 'settings',
-        label: 'Settings',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'feedback',
-        label: 'Send Feedback',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'help',
-        iconColor: 'primary',
-        label: 'Help',
-        separator: false,
-        groups: []
-      }
-    ]
 
-    const menuList2 = [
-      {
-        icon: 'home',
-        label: 'Inicio',
-        separator: false
-      },
-      {
-        icon: 'send',
-        label: 'Outbox',
-        separator: false
-      },
-      {
-        icon: 'delete',
-        label: 'Trash',
-        separator: false
-      },
-      {
-        icon: 'error',
-        label: 'Spam',
-        separator: true
-      },
-      {
-        icon: 'settings',
-        label: 'Settings',
-        separator: false
-      },
-      {
-        icon: 'feedback',
-        label: 'Send Feedback',
-        separator: false
-      },
-      {
-        icon: 'help',
-        iconColor: 'primary',
-        label: 'Help',
-        separator: false
-      }
-    ]
-
-    return {
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      leftDrawerOpen,
-
-      rightDrawerOpen,
-      toggleRightDrawer() {
-        rightDrawerOpen.value = !rightDrawerOpen.value
-      },
-      useUserStore,
-      router,
-      menuList,
-      menuList2,
-    }
+const leftDrawerOpen = ref(false)
+const rightDrawerOpen = ref(false)
+const useUserStore = UserStore()
+const router = useRouter()
+const menuList = [
+  {
+    icon: 'home',
+    label: 'Inicio',
+    separator: true,
+    path: '/administracion',
+    groups: ['Administrador', 'Moderador', 'Consultor']
+  },
+  {
+    icon: 'web',
+    label: 'Página Web',
+    separator: true,
+    path: '/',
+    groups: ['Administrador', 'Moderador', 'Consultor']
+  },
+  {
+    icon: 'manage_accounts',
+    label: 'Usuarios',
+    separator: false,
+    path: '/users',
+    groups: ['Administrador']
+  },
+  {
+    icon: 'house',
+    label: 'Empresas',
+    separator: false,
+    path: '/empresas',
+    groups: ['Administrador']
+  },
+  {
+    icon: 'delete',
+    label: 'Trash',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'error',
+    label: 'Spam',
+    separator: true,
+    groups: []
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'feedback',
+    label: 'Send Feedback',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'help',
+    iconColor: 'primary',
+    label: 'Help',
+    separator: false,
+    groups: []
   }
+]
+
+const menuList2 = [
+  {
+    icon: 'home',
+    label: 'Inicio',
+    separator: false
+  },
+  {
+    icon: 'send',
+    label: 'Outbox',
+    separator: false
+  },
+  {
+    icon: 'delete',
+    label: 'Trash',
+    separator: false
+  },
+  {
+    icon: 'error',
+    label: 'Spam',
+    separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    separator: false
+  },
+  {
+    icon: 'feedback',
+    label: 'Send Feedback',
+    separator: false
+  },
+  {
+    icon: 'help',
+    iconColor: 'primary',
+    label: 'Help',
+    separator: false
+  }
+]
+
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+const toggleRightDrawer = () => {
+  rightDrawerOpen.value = !rightDrawerOpen.value
+}
+
 </script>

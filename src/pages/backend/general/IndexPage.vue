@@ -9,7 +9,7 @@
     Groups:
     <br>
     <q-list>
-      <q-item v-for="(item, index) in administration.groups">{{item.name}}</q-item>
+      <q-item v-for="(item, index) in administration.groups">{{ item.name }}</q-item>
     </q-list>
 
     <div>
@@ -17,23 +17,12 @@
   </q-page>
 </template>
 
-<script>
+<script setup>
 import {defineComponent} from 'vue'
 import {UserStore} from "stores/user-store";
 import EssentialLink from "components/EssentialLink.vue";
 import {AdministrationStore} from "stores/administration-store";
 
-export default defineComponent({
-  name: 'IndexPage',
-  components: {EssentialLink},
-  setup() {
-    const user = UserStore()
-    const administration = AdministrationStore()
-
-    return {
-      user,
-      administration
-    }
-  }
-});
+const user = UserStore()
+const administration = AdministrationStore()
 </script>
