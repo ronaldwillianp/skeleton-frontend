@@ -158,6 +158,13 @@ export default {
         groups: ['Administrador']
       },
       {
+        icon: 'house',
+        label: 'Empresas',
+        separator: false,
+        path: '/empresas',
+        groups: ['Administrador']
+      },
+      {
         icon: 'delete',
         label: 'Trash',
         separator: false,
