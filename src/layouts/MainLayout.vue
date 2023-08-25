@@ -21,7 +21,6 @@
                   <q-icon name="account_circle"/>
                 </q-item-section>
               </q-item>
-              <q-separator/>
               <q-item clickable>
                 <q-item-section>Preferences</q-item-section>
                 <q-item-section side>
@@ -57,7 +56,6 @@
                 </q-menu>
 
               </q-item>
-              <q-separator/>
               <q-item clickable v-close-popup @click="useUserStore.logout()">
                 <q-item-section>Salir</q-item-section>
                 <q-item-section side>
@@ -72,7 +70,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" elevated>
+    <q-drawer :width="240" show-if-above v-model="leftDrawerOpen" side="left" class="shadow-2">
       <!-- drawer content -->
 
       <q-scroll-area class="fit">

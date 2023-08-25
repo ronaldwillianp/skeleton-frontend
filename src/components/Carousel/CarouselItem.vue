@@ -10,7 +10,7 @@
       :autoplay="4500"
       infinite
       arrows
-      height="400px"
+      height="550px"
       v-model:fullscreen="fullscreen"
     >
       <!-- Primero Ejemplo -->
