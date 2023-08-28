@@ -9,6 +9,11 @@
       :selected-rows-label="getSelectedString"
       selection="multiple"
       v-model:selected="selected"
+      :pagination-label="getPaginationLabel"
+      :loading-label="textInfo.loadingLabel"
+      :rows-per-page-label="textInfo.rowPerPageLabel"
+      :no-data-label="textInfo.noDatalabel"
+      :loading="isLoading"
     >
       <template v-slot:top-right>
         <q-btn class="bg-negative text-white q-mr-md" v-if="selected.length>0"
@@ -62,9 +67,9 @@
     </q-table>
 
 
-<!--    <div class="q-mt-md">-->
-<!--      Selected: {{ JSON.stringify(selected) }}-->
-<!--    </div>-->
+    <!--    <div class="q-mt-md">-->
+    <!--      Selected: {{ JSON.stringify(selected) }}-->
+    <!--    </div>-->
   </div>
 
   <q-dialog v-model="confirm" persistent>
@@ -89,7 +94,9 @@
       <q-separator></q-separator>
       <q-card-section>
         <UpdatePassword :id="dialogUser.id" @passwordUpdated="dialogChangePassword=false">
-          <slot><q-btn label="Cancelar" v-close-popup color="negative" type="button" class="q-mt-md q-mr-sm"></q-btn></slot>
+          <slot>
+            <q-btn label="Cancelar" v-close-popup color="negative" type="button" class="q-mt-md q-mr-sm"></q-btn>
+          </slot>
         </UpdatePassword>
       </q-card-section>
 
@@ -105,6 +112,12 @@ import {api} from "boot/axios";
 import {onMounted} from "vue";
 import {UserStore} from "stores/user-store";
 import UpdatePassword from "components/UpdatePassword.vue";
+import useTable from '../../../composables/useTable'
+
+const {
+  getPaginationLabel,
+  textInfo
+} = useTable()
 
 const columns = [
   {name: 'username', align: 'left', label: 'Usuario', field: 'username', sortable: true},
@@ -116,6 +129,7 @@ const columns = [
   {name: 'opciones', align: 'left', label: 'Opciones', field: 'opciones', sortable: false},
 ]
 
+const isLoading = ref(false)
 const selected = ref([])
 const user_list = ref([])
 const confirm = ref(false)
@@ -131,9 +145,10 @@ onMounted(() => {
   getUser()
 })
 const getUser = () => {
-
+  isLoading.value = true
   api.get('administracion/user/').then(response => {
     user_list.value = response.data
+    isLoading.value = false
     response.data.filter(i => {
       if (i.username == useUserStore.user.username) {
         user_list.value.splice(user_list.value.indexOf(i), 1)
@@ -179,7 +194,7 @@ const deleteUserTransaction = () => {
     for (let i in response.data.deleted_users) {
       $q.notify({
         type: 'positive',
-        message: 'El usuario: ' + response.data.deleted_users[i].username +' ha sido eliminado.',
+        message: 'El usuario: ' + response.data.deleted_users[i].username + ' ha sido eliminado.',
         position: 'top-right',
         progress: true,
       })
