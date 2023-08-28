@@ -2,6 +2,7 @@ import {route} from 'quasar/wrappers'
 import {createRouter, createMemoryHistory, createWebHistory, createWebHashHistory, useRoute} from 'vue-router'
 import routes from './routes'
 import {UserStore} from "stores/user-store";
+import {ConfiguracionAdministracionStore} from "stores/configuracion-administracion";
 
 /*
  * If not building with SSR mode, you can
@@ -38,17 +39,19 @@ export default route(function (/* { store, ssrContext } */) {
     const useUserStore = UserStore()
     useUserStore.initializeUser()
 
-    if(useUserStore.refreshToken){
+    const useConfiguracionAdministracion = ConfiguracionAdministracionStore()
+    useConfiguracionAdministracion.initializeConfiguracionAdministracion()
+
+    if (useUserStore.refreshToken) {
       let token_to_check = useUserStore.refreshToken
-      if(useUserStore.isTokenExpired(token_to_check)){
+      if (useUserStore.isTokenExpired(token_to_check)) {
         useUserStore.logout()
       }
     }
 
     if (to.matched.some(record => record.meta.requireAuth) && !useUserStore.accessToken) {
       next({name: 'login', query: {next: to.fullPath}})
-    }
-    else if(to.meta.groups && !to.meta.groups.some(item=> useUserStore.user.groups.includes(item))) {
+    } else if (to.meta.groups && !to.meta.groups.some(item => useUserStore.user.groups.includes(item))) {
       next(from)
     } else if (to.name === "login" && useUserStore.user) {
       next({name: "home"});
