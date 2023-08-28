@@ -1,39 +1,16 @@
 <template>
   <q-page class="flex flex-center">
-    Datos de Usuario Logueado:
-    <br>
-    Usuario: {{ user.user?.username }}
-    <br>
-    Email: {{ user.user?.email }}
-    <br>
-    Groups:
-    <br>
-    <q-list>
-      <q-item v-for="(item, index) in administration.groups">{{item.name}}</q-item>
-    </q-list>
-
-    <div>
-    </div>
+    Datos:
+    {{useConfiguracionAdministracion.configuracionAdministracion}}
   </q-page>
 </template>
 
-<script>
-import {defineComponent} from 'vue'
+<script setup>
 import {UserStore} from "stores/user-store";
-import EssentialLink from "components/EssentialLink.vue";
-import {AdministrationStore} from "stores/administration-store";
+import {ConfiguracionAdministracionStore} from "stores/configuracion-administracion";
 
-export default defineComponent({
-  name: 'IndexPage',
-  components: {EssentialLink},
-  setup() {
-    const user = UserStore()
-    const administration = AdministrationStore()
+const user = UserStore()
+const useConfiguracionAdministracion = ConfiguracionAdministracionStore()
 
-    return {
-      user,
-      administration
-    }
-  }
-});
+
 </script>

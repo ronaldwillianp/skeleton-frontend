@@ -6,15 +6,6 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
 
-export default defineComponent({
-  name: 'LoginLayout',
-
-  setup () {
-    return {
-    }
-  }
-})
 </script>

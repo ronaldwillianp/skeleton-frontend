@@ -1,8 +1,11 @@
 <template>
+  <q-ajax-bar color="positive" size="5px"/>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="bg-primary text-white">
-      <q-toolbar>
+    <q-header elevated :style="'background-color: ' + useConfiguracionAdministracion.configuracionAdministracion.navbar_color_default">
+
+
+    <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer"/>
 
         <q-toolbar-title>
@@ -72,11 +75,11 @@
 
     <q-drawer :width="240" show-if-above v-model="leftDrawerOpen" side="left" class="shadow-2">
       <!-- drawer content -->
-
       <q-scroll-area class="fit">
         <q-list>
-          <div v-for="(menuItem, index) in menuList" :key="index" >
-            <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable active-class="text-primary" exact v-ripple :to="menuItem.path">
+          <div v-for="(menuItem, index) in menuList" :key="index">
+            <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable
+                    active-class="text-primary" exact v-ripple :to="menuItem.path">
               <q-item-section avatar>
                 <q-icon :name="menuItem.icon"/>
               </q-item-section>
@@ -94,6 +97,17 @@
       <!-- drawer content -->
       <q-scroll-area class="fit">
         <q-list>
+
+          <q-item clickable v-ripple @click="dialogNavbarColorDefault=true">
+            <q-item-section avatar>
+              <q-icon name="menu"/>
+            </q-item-section>
+            Menu
+            <q-item-section>
+
+            </q-item-section>
+          </q-item>
+
           <template v-for="(menuItem, index) in menuList2" :key="index">
             <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
               <q-item-section avatar>
@@ -126,129 +140,141 @@
       </q-toolbar>
     </q-footer>
 
+    <q-dialog v-model="dialogNavbarColorDefault">
+      <q-card style="background-color: transparent; box-shadow: none;position: relative; z-index: 10">
+        <q-btn round color="primary" icon="check" style="margin-top: -15px; position: absolute; z-index: 20; " />
+          <q-color v-model="nullModel" default-value="#285de0" style="max-width: 350px; width: 250px"></q-color>
+        <q-btn label="Cancelar" v-close-popup color="negative" type="button" class="q-mt-md q-mr-sm hidden"></q-btn>
+
+      </q-card>
+    </q-dialog>
+
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import {ref} from 'vue'
 import {UserStore} from "stores/user-store";
 import {useRouter} from "vue-router";
+import {ConfiguracionAdministracionStore} from "stores/configuracion-administracion";
+import Navbar from "components/Navbar.vue";
 
-export default {
-  setup() {
-    const leftDrawerOpen = ref(false)
-    const rightDrawerOpen = ref(false)
-    const useUserStore = UserStore()
-    const router = useRouter()
-    const menuList = [
-      {
-        icon: 'home',
-        label: 'Inicio',
-        separator: true,
-        path: '/',
-        groups: ['Administrador', 'Moderador', 'Consultor']
-      },
-      {
-        icon: 'manage_accounts',
-        label: 'Usuarios',
-        separator: false,
-        path: '/users',
-        groups: ['Administrador']
-      },
-      {
-        icon: 'house',
-        label: 'Empresas',
-        separator: false,
-        path: '/empresas',
-        groups: ['Administrador']
-      },
-      {
-        icon: 'delete',
-        label: 'Trash',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'error',
-        label: 'Spam',
-        separator: true,
-        groups: []
-      },
-      {
-        icon: 'settings',
-        label: 'Settings',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'feedback',
-        label: 'Send Feedback',
-        separator: false,
-        groups: []
-      },
-      {
-        icon: 'help',
-        iconColor: 'primary',
-        label: 'Help',
-        separator: false,
-        groups: []
-      }
-    ]
+const leftDrawerOpen = ref(false)
+const rightDrawerOpen = ref(true)
 
-    const menuList2 = [
-      {
-        icon: 'home',
-        label: 'Inicio',
-        separator: false
-      },
-      {
-        icon: 'send',
-        label: 'Outbox',
-        separator: false
-      },
-      {
-        icon: 'delete',
-        label: 'Trash',
-        separator: false
-      },
-      {
-        icon: 'error',
-        label: 'Spam',
-        separator: true
-      },
-      {
-        icon: 'settings',
-        label: 'Settings',
-        separator: false
-      },
-      {
-        icon: 'feedback',
-        label: 'Send Feedback',
-        separator: false
-      },
-      {
-        icon: 'help',
-        iconColor: 'primary',
-        label: 'Help',
-        separator: false
-      }
-    ]
+const nullModel = ref(null)
+const dialogNavbarColorDefault = ref(false)
 
-    return {
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-      leftDrawerOpen,
-
-      rightDrawerOpen,
-      toggleRightDrawer() {
-        rightDrawerOpen.value = !rightDrawerOpen.value
-      },
-      useUserStore,
-      router,
-      menuList,
-      menuList2,
-    }
+const useUserStore = UserStore()
+const useConfiguracionAdministracion = ConfiguracionAdministracionStore()
+const router = useRouter()
+const menuList = [
+  {
+    icon: 'home',
+    label: 'Inicio',
+    separator: true,
+    path: '/administracion',
+    groups: ['Administrador', 'Moderador', 'Consultor']
+  },
+  {
+    icon: 'web',
+    label: 'Página Web',
+    separator: true,
+    path: '/',
+    groups: ['Administrador', 'Moderador', 'Consultor']
+  },
+  {
+    icon: 'manage_accounts',
+    label: 'Usuarios',
+    separator: false,
+    path: '/users',
+    groups: ['Administrador']
+  },
+  {
+    icon: 'house',
+    label: 'Empresas',
+    separator: false,
+    path: '/empresas',
+    groups: ['Administrador']
+  },
+  {
+    icon: 'delete',
+    label: 'Trash',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'error',
+    label: 'Spam',
+    separator: true,
+    groups: []
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'feedback',
+    label: 'Send Feedback',
+    separator: false,
+    groups: []
+  },
+  {
+    icon: 'help',
+    iconColor: 'primary',
+    label: 'Help',
+    separator: false,
+    groups: []
   }
+]
+
+const menuList2 = [
+  {
+    icon: 'home',
+    label: 'Inicio',
+    separator: false
+  },
+  {
+    icon: 'send',
+    label: 'Outbox',
+    separator: false
+  },
+  {
+    icon: 'delete',
+    label: 'Trash',
+    separator: false
+  },
+  {
+    icon: 'error',
+    label: 'Spam',
+    separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    separator: false
+  },
+  {
+    icon: 'feedback',
+    label: 'Send Feedback',
+    separator: false
+  },
+  {
+    icon: 'help',
+    iconColor: 'primary',
+    label: 'Help',
+    separator: false
+  }
+]
+
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+const toggleRightDrawer = () => {
+  rightDrawerOpen.value = !rightDrawerOpen.value
+}
+
 </script>

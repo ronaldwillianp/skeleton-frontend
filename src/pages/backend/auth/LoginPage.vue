@@ -10,14 +10,14 @@
 
               </q-card-section>
               <q-card-section>
-<!--                <q-img-->
-<!--                  src="~assets/factura.png"-->
-<!--                  style="top: 0; right: -10px; transform: translateY(-50%); max-width: 200px"-->
-<!--                  class="absolute"-->
-<!--                >-->
-<!--                </q-img>-->
+                <!--                <q-img-->
+                <!--                  src="~assets/factura.png"-->
+                <!--                  style="top: 0; right: -10px; transform: translateY(-50%); max-width: 200px"-->
+                <!--                  class="absolute"-->
+                <!--                >-->
+                <!--                </q-img>-->
                 <q-form @submit.prevent="user.logIn(userForm)"
-                  class="q-gutter-xs col-xs-12 col-sm-12 col-md-6 q-mt-lg q-pa-sm"
+                        class="q-gutter-xs col-xs-12 col-sm-12 col-md-6 q-mt-lg q-pa-sm"
                 >
                   <q-input
                     outlined
@@ -66,25 +66,16 @@
     </q-page-container>
   </q-layout>
 </template>
-<script>
+<script setup>
 import {defineComponent, ref} from 'vue'
 import {useQuasar} from "quasar";
 import {UserStore} from "stores/user-store";
 
-export default defineComponent({
-  name: 'LoginPage',
-  setup() {
-    const $q = useQuasar()
-    const userForm = ref({
-      username: "",
-      password: "",
-    })
-
-    const user = UserStore()
-    return {
-      user,
-      userForm,
-    }
-  }
+const $q = useQuasar()
+const userForm = ref({
+  username: "",
+  password: "",
 })
+
+const user = UserStore()
 </script>

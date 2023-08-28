@@ -140,86 +140,74 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {defineComponent, onMounted, ref} from 'vue'
 import {useQuasar} from "quasar";
 import {UserStore} from "stores/user-store";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
 
-export default defineComponent({
-  name: 'AddUserPage',
-  setup() {
-    const $q = useQuasar()
-    const userForm = ref({
-      username: "",
-      password: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      is_active: true,
-      groups: [],
+const $q = useQuasar()
+const userForm = ref({
+  username: "",
+  password: "",
+  first_name: "",
+  last_name: "",
+  email: "",
+  is_active: true,
+  groups: [],
 
+})
+
+const user = UserStore()
+const router = useRouter()
+
+const list_groups = ref([])
+const options = ref(list_groups)
+
+const addUser = () => {
+  api.post('http://localhost:8000/api/v1.0/administracion/user/', userForm.value)
+    .then(response => {
+      $q.notify({
+        type: 'positive',
+        message: 'Usuario creado correctamente.',
+        position: 'top-right',
+        progress: true,
+      })
+      router.push({path: '/users'})
     })
-
-    const user = UserStore()
-    const router = useRouter()
-
-    const list_groups = ref([])
-    const options = ref(list_groups)
-
-    const addUser = () => {
-      api.post('http://localhost:8000/api/v1.0/administracion/user/', userForm.value)
-        .then(response => {
+    .catch(error => {
+      if (error.response.data) {
+        for (let i in error.response.data) {
           $q.notify({
-            type: 'positive',
-            message: 'Usuario creado correctamente.',
+            type: 'negative',
+            message: error.response.data[i],
             position: 'top-right',
             progress: true,
           })
-          router.push({path: '/users'})
+        }
+      } else {
+        $q.notify({
+          type: 'negative',
+          message: error.response,
+          position: 'top-right',
+          progress: true,
         })
-        .catch(error => {
-          if (error.response.data) {
-            for (let i in error.response.data) {
-              $q.notify({
-                type: 'negative',
-                message: error.response.data[i],
-                position: 'top-right',
-                progress: true,
-              })
-            }
-          } else {
-            $q.notify({
-              type: 'negative',
-              message: error.response,
-              position: 'top-right',
-              progress: true,
-            })
-          }
+      }
 
-        })
-    }
-
-    const getGroups = () => {
-      api.get('http://127.0.0.1:8000/api/v1.0/administracion/group/').then(response => {
-        list_groups.value = response.data
-      })
-    }
-
-    onMounted(() => {
-      getGroups()
     })
+}
 
-    return {
-      user,
-      userForm,
-      addUser,
-      getGroups,
-      list_groups,
-    }
-  }
+const getGroups = () => {
+  api.get('http://127.0.0.1:8000/api/v1.0/administracion/group/').then(response => {
+    list_groups.value = response.data
+  })
+}
+
+onMounted(() => {
+  getGroups()
 })
+
 
 </script>
 

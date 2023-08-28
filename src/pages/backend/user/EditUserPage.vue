@@ -124,101 +124,89 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {defineComponent, onMounted, ref} from 'vue'
 import {useQuasar} from "quasar";
 import {UserStore} from "stores/user-store";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
 
-export default defineComponent({
-  name: 'AddUserPage',
-  setup() {
-    const $q = useQuasar()
-    const userForm = ref({
-      id: "",
-      username: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      is_active: true,
-      groups: [],
+const $q = useQuasar()
+const userForm = ref({
+  id: "",
+  username: "",
+  first_name: "",
+  last_name: "",
+  email: "",
+  is_active: true,
+  groups: [],
 
+})
+
+const user = UserStore()
+const router = useRouter()
+const user_id = router.currentRoute.value.params.id
+let list_groups = ref([])
+
+const editUser = () => {
+  // for(let i in userForm.value.model){
+  //   userForm.value.groups.push(i.id)
+  // }
+
+
+  api.patch('http://localhost:8000/api/v1.0/administracion/user/' + user_id + '/', userForm.value)
+    .then(response => {
+      $q.notify({
+        type: 'positive',
+        message: 'Usuario actualizado correctamente.',
+        position: 'top-right',
+        progress: true,
+      })
+      router.push({path: '/users'})
     })
-
-    const user = UserStore()
-    const router = useRouter()
-    const user_id = router.currentRoute.value.params.id
-    let list_groups = ref([])
-
-    const editUser = () => {
-      // for(let i in userForm.value.model){
-      //   userForm.value.groups.push(i.id)
-      // }
-
-
-      api.patch('http://localhost:8000/api/v1.0/administracion/user/' + user_id + '/', userForm.value)
-        .then(response => {
+    .catch(error => {
+      if (error.response.data) {
+        for (let i in error.response.data) {
           $q.notify({
-            type: 'positive',
-            message: 'Usuario actualizado correctamente.',
+            type: 'negative',
+            message: error.response.data[i],
             position: 'top-right',
             progress: true,
           })
-          router.push({path: '/users'})
-        })
-        .catch(error => {
-          if (error.response.data) {
-            for (let i in error.response.data) {
-              $q.notify({
-                type: 'negative',
-                message: error.response.data[i],
-                position: 'top-right',
-                progress: true,
-              })
-            }
-          } else {
-            $q.notify({
-              type: 'negative',
-              message: error.response,
-              position: 'top-right',
-              progress: true,
-            })
-          }
-
-        })
-    }
-
-    const getUser = () => {
-      api.get('http://127.0.0.1:8000/api/v1.0/administracion/user/' + user_id + '/').then(response => {
-        userForm.value = response.data
-        userForm.value.groups = []
-        for(let i in response.data.groups_d){
-          userForm.value.groups.push(response.data.groups_d[i].id)
         }
+      } else {
+        $q.notify({
+          type: 'negative',
+          message: error.response,
+          position: 'top-right',
+          progress: true,
+        })
+      }
 
-      })
-    }
-    const getGroups = () => {
-      api.get('http://127.0.0.1:8000/api/v1.0/administracion/group/').then(response => {
-        list_groups.value = response.data
-      })
-    }
-
-    onMounted(() => {
-      getUser()
-      getGroups()
     })
+}
 
-    return {
-      user,
-      userForm,
-      editUser,
-      getGroups,
-      list_groups,
+const getUser = () => {
+  api.get('http://127.0.0.1:8000/api/v1.0/administracion/user/' + user_id + '/').then(response => {
+    userForm.value = response.data
+    userForm.value.groups = []
+    for (let i in response.data.groups_d) {
+      userForm.value.groups.push(response.data.groups_d[i].id)
     }
-  }
+
+  })
+}
+const getGroups = () => {
+  api.get('http://127.0.0.1:8000/api/v1.0/administracion/group/').then(response => {
+    list_groups.value = response.data
+  })
+}
+
+onMounted(() => {
+  getUser()
+  getGroups()
 })
+
 
 </script>
 

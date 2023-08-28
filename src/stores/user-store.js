@@ -3,7 +3,7 @@ import {defineStore} from 'pinia';
 import axios from "axios";
 import jwtDecode from 'jwt-decode';
 import {Notify} from "quasar";
-
+import {ConfiguracionAdministracionStore} from "stores/configuracion-administracion";
 
 export const UserStore = defineStore('user', {
   state: () => ({
@@ -55,8 +55,10 @@ export const UserStore = defineStore('user', {
       }
     },
     logout() {
+      const useConfiguracionAdministracion = ConfiguracionAdministracionStore()
       this.DeleteTokenStorage()
       this.$reset()
+      useConfiguracionAdministracion.deleteConfiguracionAdministracion()
       this.router.push({path: '/login'})
     },
 
