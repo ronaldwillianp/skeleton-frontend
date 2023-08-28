@@ -11,6 +11,7 @@
     "build": "quasar build"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.0.18",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "jwt-decode": "^3.1.2",
