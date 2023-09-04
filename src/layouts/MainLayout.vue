@@ -75,11 +75,12 @@
     </q-header>
 
     <!--Left Drawer-->
-    <q-drawer :width="240" show-if-above v-model="leftDrawerOpen" side="left" class="shadow-2">
+    <q-drawer :width="270" show-if-above v-model="leftDrawerOpen" side="left" class="shadow-2">
       <!-- drawer content -->
-      <q-scroll-area class="fit">
-        <q-list>
-          <div v-for="(menuItem, index) in menuList" :key="index">
+      <!--      <q-scroll-area class="fit">-->
+      <q-list>
+        <div v-for="(menuItem, index) in menuList" :key="index">
+          <div v-if="!menuItem.children">
             <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable
                     active-class="text-primary" exact v-ripple :to="menuItem.path">
               <q-item-section avatar>
@@ -89,22 +90,27 @@
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
-<!--            <q-expansion-item-->
-<!--              icon="drafts"-->
-<!--              label="Drafts"-->
-<!--              header-class="text-orange"-->
-<!--            >-->
-<!--              <q-card class="bg-grey-9">-->
-<!--                <q-card-section>-->
-<!--                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti-->
-<!--                  commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste-->
-<!--                  eveniet doloribus ullam aliquid.-->
-<!--                </q-card-section>-->
-<!--              </q-card>-->
-<!--            </q-expansion-item>-->
           </div>
-        </q-list>
-      </q-scroll-area>
+          <q-list bordered class="rounded-borders" v-else>
+            <q-expansion-item
+              expand-separator
+              icon="newspaper"
+              :label="menuItem.label"
+              default-opened
+            >
+              <q-item v-for="item in menuItem.children" :to="item.path">
+                <q-item-section avatar>
+                  <q-icon :name="item.icon"/>
+                </q-item-section>
+                <q-item-section>
+                  {{ item.label }}
+                </q-item-section>
+              </q-item>
+            </q-expansion-item>
+          </q-list>
+        </div>
+      </q-list>
+      <!--      </q-scroll-area>-->
 
     </q-drawer>
 
@@ -218,7 +224,12 @@ const menuList = [
     label: 'Noticias',
     separator: false,
     path: '/noticias',
-    groups: ['Administrador']
+    groups: ['Administrador'],
+    children: [
+      {label: 'Noticias Listado', path: '/noticias'},
+      {label: 'Categorias', path: '/categorias'},
+      {label: 'Estados', path: '/estado'},
+    ]
   },
 ]
 
