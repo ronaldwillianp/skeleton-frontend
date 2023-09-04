@@ -2,10 +2,11 @@
   <q-ajax-bar color="positive" size="5px"/>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated :style="'background-color: ' + useConfiguracionAdministracion.configuracionAdministracion.navbar_color_default">
+    <!--    <q-header elevated :style="'background-color: ' + useConfiguracionAdministracion.configuracionAdministracion.navbar_color_default">-->
+    <q-header elevated>
 
 
-    <q-toolbar>
+      <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer"/>
 
         <q-toolbar-title>
@@ -73,6 +74,7 @@
       </q-toolbar>
     </q-header>
 
+    <!--Left Drawer-->
     <q-drawer :width="240" show-if-above v-model="leftDrawerOpen" side="left" class="shadow-2">
       <!-- drawer content -->
       <q-scroll-area class="fit">
@@ -87,12 +89,26 @@
                 {{ menuItem.label }}
               </q-item-section>
             </q-item>
+<!--            <q-expansion-item-->
+<!--              icon="drafts"-->
+<!--              label="Drafts"-->
+<!--              header-class="text-orange"-->
+<!--            >-->
+<!--              <q-card class="bg-grey-9">-->
+<!--                <q-card-section>-->
+<!--                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti-->
+<!--                  commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste-->
+<!--                  eveniet doloribus ullam aliquid.-->
+<!--                </q-card-section>-->
+<!--              </q-card>-->
+<!--            </q-expansion-item>-->
           </div>
         </q-list>
       </q-scroll-area>
 
     </q-drawer>
 
+    <!--Right Drawer-->
     <q-drawer v-model="rightDrawerOpen" side="right" elevated>
       <!-- drawer content -->
       <q-scroll-area class="fit">
@@ -142,8 +158,8 @@
 
     <q-dialog v-model="dialogNavbarColorDefault">
       <q-card style="background-color: transparent; box-shadow: none;position: relative; z-index: 10">
-        <q-btn round color="primary" icon="check" style="margin-top: -15px; position: absolute; z-index: 20; " />
-          <q-color v-model="nullModel" default-value="#285de0" style="max-width: 350px; width: 250px"></q-color>
+        <q-btn round color="primary" icon="check" style="margin-top: -15px; position: absolute; z-index: 20; "/>
+        <q-color v-model="nullModel" default-value="#285de0" style="max-width: 350px; width: 250px"></q-color>
         <q-btn label="Cancelar" v-close-popup color="negative" type="button" class="q-mt-md q-mr-sm hidden"></q-btn>
 
       </q-card>
@@ -160,7 +176,7 @@ import {ConfiguracionAdministracionStore} from "stores/configuracion-administrac
 import Navbar from "components/Navbar.vue";
 
 const leftDrawerOpen = ref(false)
-const rightDrawerOpen = ref(true)
+const rightDrawerOpen = ref(false)
 
 const nullModel = ref(null)
 const dialogNavbarColorDefault = ref(false)
@@ -198,36 +214,12 @@ const menuList = [
     groups: ['Administrador']
   },
   {
-    icon: 'delete',
-    label: 'Trash',
+    icon: 'newspaper',
+    label: 'Noticias',
     separator: false,
-    groups: []
+    path: '/noticias',
+    groups: ['Administrador']
   },
-  {
-    icon: 'error',
-    label: 'Spam',
-    separator: true,
-    groups: []
-  },
-  {
-    icon: 'settings',
-    label: 'Settings',
-    separator: false,
-    groups: []
-  },
-  {
-    icon: 'feedback',
-    label: 'Send Feedback',
-    separator: false,
-    groups: []
-  },
-  {
-    icon: 'help',
-    iconColor: 'primary',
-    label: 'Help',
-    separator: false,
-    groups: []
-  }
 ]
 
 const menuList2 = [

@@ -29,6 +29,11 @@ const routes = [
 
       {path: 'profile', name: "profile",meta: {groups: ['Administrador', 'Moderador', 'Consultor']}, component: () => import('pages/backend/user/ProfilePage.vue')},
       {path: 'prueba-ruta', name: "prueba-ruta", component: () => import('pages/backend/general/PruebaRuta.vue')},
+
+    //  Getion Notcias
+      {path: '/noticias', name: "noticias", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/NoticiasPage.vue')},
+      {path: '/add-noticia', name: "add-noticia", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/AddNoticiasPage.vue')},
+      {path: '/edit-noticias/:id', name: "edit-noticias", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/EditNoticiaPage.vue')},
     ]
   },
   {
