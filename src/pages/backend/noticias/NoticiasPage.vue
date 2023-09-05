@@ -44,8 +44,8 @@
       <template v-slot:body-cell-opciones="props">
         <q-td :props="props">
           <div>
-            <q-btn class="q-ma-sm bg-primary text-white" @click="checkChangePassword(props.row)">
-              <q-icon name="password" class=""></q-icon>
+            <q-btn class="q-ma-sm bg-primary text-white" @click="showNoticiasItem(props.row)">
+              <q-icon name="visibility" class=""></q-icon>
             </q-btn>
             <q-btn class="q-ma-sm bg-primary text-white" @click="$router.push({path:'/edit-noticias/' + props.row.id})">
               <q-icon name="edit" class="q-mr-sm"></q-icon>
@@ -60,6 +60,42 @@
       </template>
     </q-table>
     <DeleteDialog :is-open="isOpenDelete" @delete="deleteNoticia" @closeDialog="isOpenDelete = false"/>
+
+    <q-dialog v-model="isOpenNoticiaItem">
+      <q-card class="my-card">
+        <img src="https://cdn.quasar.dev/img/mountains.jpg">
+        <div class="row items-center q-mt-xs q-px-md">
+          <div>{{ noticiaItem.fecha_creacion }}</div>
+          <div class="row items-center q-ml-md">
+            <div
+              class="tw-rounded-full tw-text-black tw-text-xs tw-bg-gray-50 tw-px-3 tw-py-1.5 tw-font-medium tw-text-gray-600 hover:tw-bg-gray-100">
+              Explosiones
+            </div>
+          </div>
+        </div>
+        <q-card-section class="q-pt-sm">
+          <div class="text-h6">{{ noticiaItem.titulo }}</div>
+          <div class="text-subtitle2">{{ noticiaItem.descripcion }}</div>
+        </q-card-section>
+        <q-card-section>
+          <div class="tw-relative tw-flex tw-items-center tw-gap-x-4">
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt=""
+              class="tw-h-10 tw-w-10 tw-rounded-full tw-bg-gray-50"
+            />
+            <div class="tw-text-sm tw-leading-6">
+              <p class="tw-font-semibold tw-text-gray-900">
+                <a>
+                  <span class="tw-absolute tw-inset-0"/>
+                  Usuario
+                </a>
+              </p>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 
@@ -91,6 +127,8 @@ const columns = [
 const isLoading = ref(false)
 const isOpenDelete = ref(false)
 const noticias = ref([])
+const noticiaItem = ref([])
+const isOpenNoticiaItem = ref(false)
 const deleteNoticiaId = ref([])
 const categorias = ref([])
 const estados = ref([])
@@ -156,4 +194,9 @@ const deleteNoticia = () => {
   })
 }
 
+const showNoticiasItem = (item) => {
+  noticiaItem.value = item
+  noticiaItem.value.fecha_creacion = dayjs(item.fecha_creacion).format('MMM D, YYYY')
+  isOpenNoticiaItem.value = true
+}
 </script>

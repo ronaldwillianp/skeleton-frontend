@@ -96,7 +96,7 @@
               expand-separator
               icon="newspaper"
               :label="menuItem.label"
-              default-opened
+
             >
               <q-item v-for="item in menuItem.children" :to="item.path">
                 <q-item-section avatar>
