@@ -44,9 +44,6 @@
       <template v-slot:body-cell-opciones="props">
         <q-td :props="props">
           <div>
-            <q-btn class="q-ma-sm bg-primary text-white" @click="showNoticiasItem(props.row)">
-              <q-icon name="visibility" class=""></q-icon>
-            </q-btn>
             <q-btn class="q-ma-sm bg-primary text-white" @click="$router.push({path:'/edit-noticias/' + props.row.id})">
               <q-icon name="edit" class="q-mr-sm"></q-icon>
               Editar

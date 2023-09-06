@@ -34,6 +34,16 @@ const routes = [
       {path: '/noticias', name: "noticias", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/NoticiasPage.vue')},
       {path: '/add-noticia', name: "add-noticia", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/AddNoticiasPage.vue')},
       {path: '/edit-noticias/:id', name: "edit-noticias", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/EditNoticiaPage.vue')},
+
+      // Gestion Categorias
+      {path: '/categorias', name: "categorias", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/categorias/CategoriasPage.vue')},
+      {path: '/add-categoria', name: "add-categoria", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/categorias/AddCategoriasPage.vue')},
+      {path: '/edit-categoria/:id', name: "edit-categoria", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/categorias/EditCategoriasPage.vue')},
+
+      // Gestion Estados
+      {path: '/estados', name: "estados", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/EstadosPage.vue')},
+      {path: '/add-estado', name: "add-estado", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/AddEstadosPage.vue')},
+      {path: '/edit-estado/:id', name: "edit-estado", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/EditEstadosPage.vue')},
     ]
   },
   {

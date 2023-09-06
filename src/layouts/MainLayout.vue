@@ -91,7 +91,7 @@
               </q-item-section>
             </q-item>
           </div>
-          <q-list bordered class="rounded-borders" v-else>
+          <q-list v-else>
             <q-expansion-item
               expand-separator
               icon="newspaper"
@@ -228,7 +228,7 @@ const menuList = [
     children: [
       {label: 'Noticias Listado', path: '/noticias'},
       {label: 'Categorias', path: '/categorias'},
-      {label: 'Estados', path: '/estado'},
+      {label: 'Estados', path: '/estados'},
     ]
   },
 ]
