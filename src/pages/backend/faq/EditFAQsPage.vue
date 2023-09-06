@@ -2,16 +2,16 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Agregar Estado
+        Editar FAQ
       </q-card-section>
       <q-card-section>
-        <q-form @submit="storeEstado">
+        <q-form @submit="updateFaq">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.nombre"
-                label="Nombre"
+                v-model="form.pregunta"
+                label="Pregunta"
                 type="text"
                 lazy-rules
                 :rules="[rules.required]"
@@ -20,15 +20,15 @@
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.descripcion"
-                label="Descripción"
+                v-model="form.respuesta"
+                label="Respuesta"
                 type="text"
               />
             </div>
           </div>
 
           <q-btn
-            @click="$router.push({path:'/estados'})"
+            @click="$router.push({path:'/faqs'})"
             type="button"
             color="negative"
             class="text-white q-mr-sm">
@@ -51,30 +51,39 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 import {useQuasar} from "quasar";
-import {UserStore} from "stores/user-store";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
-import rules from '../../../../utils/rules'
+import rules from '../../../utils/rules'
 
 const $q = useQuasar()
 const router = useRouter()
+const faq_id = router.currentRoute.value.params.id
 
 const form = ref({
-  nombre: '',
-  descripcion: '',
+  pregunta: '',
+  respuesta: '',
 })
 
-const storeCategoria = () => {
-    api.post('/social/estado_noticia/', form.value)
-      .then(response => {
+onMounted(() => {
+  getFaq()
+})
+const getFaq = () => {
+  api.get(`/social/faq/` + faq_id + "/").then(response => {
+    form.value = response.data
+  })
+}
+
+const updateFaq = () => {
+  api.patch('/social/faq/' + faq_id + '/', form.value)
+    .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Estado creado correctamente.',
+        message: 'FAQ editada correctamente.',
         position: 'top-right',
         progress: true,
       })
 
-      router.push({path: '/estados'})
+      router.push({path: '/faqs'})
     })
     .catch(error => {
       if (error.response.data) {

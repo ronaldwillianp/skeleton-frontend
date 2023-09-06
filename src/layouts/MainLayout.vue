@@ -231,6 +231,13 @@ const menuList = [
       {label: 'Estados', path: '/estados'},
     ]
   },
+  {
+    icon: 'quiz',
+    label: 'FAQs',
+    separator: false,
+    path: '/faqs',
+    groups: ['Administrador']
+  },
 ]
 
 const menuList2 = [

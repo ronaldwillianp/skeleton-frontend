@@ -44,6 +44,11 @@ const routes = [
       {path: '/estados', name: "estados", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/EstadosPage.vue')},
       {path: '/add-estado', name: "add-estado", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/AddEstadosPage.vue')},
       {path: '/edit-estado/:id', name: "edit-estado", meta: {groups: ['Administrador']}, component: () => import('pages/backend/noticias/estados/EditEstadosPage.vue')},
+
+       // Gestion FAQs
+      {path: '/faqs', name: "faqs", meta: {groups: ['Administrador']}, component: () => import('pages/backend/faq/FAQsPage.vue')},
+      {path: '/add-faq', name: "add-faq", meta: {groups: ['Administrador']}, component: () => import('pages/backend/faq/AddFAQsPage.vue')},
+      {path: '/edit-faq/:id', name: "edit-faq", meta: {groups: ['Administrador']}, component: () => import('pages/backend/faq/EditFAQsPage.vue')},
     ]
   },
   {
