@@ -164,13 +164,14 @@ const getEstadoNoticias = () => {
   })
 }
 const deleteNoticia = () => {
-  api.delete('/social/noticias/' + deleteNoticiaId.value.id + '/').then(response => {
+  api.delete('/social/noticia/' + deleteNoticiaId.value.id + '/').then(response => {
     $q.notify({
       type: 'positive',
       message: 'Noticia eliminada correctamente.',
       position: 'top-right',
       progress: true,
     })
+    isOpenDelete.value = false
     getNoticias()
   }).catch(error => {
     if (error.response.status === 404) {

@@ -238,6 +238,13 @@ const menuList = [
     path: '/faqs',
     groups: ['Administrador']
   },
+  {
+    icon: 'link',
+    label: 'Enlaces de Interes',
+    separator: false,
+    path: '/enlaces-interes',
+    groups: ['Administrador']
+  },
 ]
 
 const menuList2 = [
