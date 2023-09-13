@@ -30,7 +30,7 @@
               <q-select outlined v-model="selectCategoria" transition-show="jump-up"
                         transition-hide="jump-up" label="Seleccione una categoría" option-value="id"
                         option-label="nombre"
-                        :options="categorias" emit-value map-options multiple
+                        :options="categorias" multiple
                         :rules="[rules.requiredSelect]"
               >
                 <template v-slot:no-option>
@@ -101,7 +101,7 @@ const form = ref({
   descripcion: '',
   creada_por: '',
   estado: '',
-  categoria: ''
+  categoria: []
 })
 
 onMounted(() => {
@@ -110,6 +110,7 @@ onMounted(() => {
 })
 
 const storeNoticia = () => {
+
   const formNoticias = {
     titulo: form.value.titulo,
     descripcion: form.value.descripcion,
@@ -117,8 +118,9 @@ const storeNoticia = () => {
     estado: selectEstado.value,
     categoria: selectCategoria.value
   }
-    api.post('/social/noticia/', formNoticias)
-      .then(response => {
+  // console.log(formNoticias)
+  api.post('/social/noticia/', formNoticias)
+    .then(response => {
       $q.notify({
         type: 'positive',
         message: 'Noticia creada correctamente.',
@@ -129,23 +131,24 @@ const storeNoticia = () => {
       router.push({path: '/noticias'})
     })
     .catch(error => {
-      if (error.response.data) {
-        for (let i in error.response.data) {
-          $q.notify({
-            type: 'negative',
-            message: error.response.data[i],
-            position: 'top-right',
-            progress: true,
-          })
-        }
-      } else {
-        $q.notify({
-          type: 'negative',
-          message: error.response,
-          position: 'top-right',
-          progress: true,
-        })
-      }
+      // if (error.response.data) {
+      //   for (let i in error.response.data) {
+      //     $q.notify({
+      //       type: 'negative',
+      //       message: error.response.data[i],
+      //       position: 'top-right',
+      //       progress: true,
+      //     })
+      //   }
+      // } else {
+      //   $q.notify({
+      //     type: 'negative',
+      //     message: error.response,
+      //     position: 'top-right',
+      //     progress: true,
+      //   })
+      // }
+      console.log(error)
     })
 }
 

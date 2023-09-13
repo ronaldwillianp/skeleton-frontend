@@ -12,12 +12,12 @@
         v-for="faq in faqs"
         :key="faq.id"
         expand-separator
-        :label="faq.question"
+        :label="faq.pregunta"
         class="tw-text-base tw-border tw-border-gray-200 tw-rounded-lg tw-shadow-sm"
       >
         <q-card class="tw-border-t tw-border-gray-200">
           <q-card-section>
-           {{faq.answer}}
+           {{faq.respuesta}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -26,24 +26,37 @@
 </template>
 
 <script setup>
+import {api} from "boot/axios";
+import {ref, onMounted} from 'vue'
 
-const faqs = [
-  {
-    id: 1,
-    question: 'Lorem 1',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
-  },
-  {
-    id: 2,
-    question: 'Lorem 2',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
-  },
-  {
-    id: 3,
-    question: 'Lorem 3',
-    answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
-  },
-]
+const faqs = ref([])
+// const faqs = [
+//   {
+//     id: 1,
+//     question: 'Lorem 1',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
+//   },
+//   {
+//     id: 2,
+//     question: 'Lorem 2',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
+//   },
+//   {
+//     id: 3,
+//     question: 'Lorem 3',
+//     answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste eveniet doloribus ullam aliquid.'
+//   },
+// ]
+onMounted(() => {
+  getFAQ()
+})
+
+function getFAQ () {
+  api.get('/social/faq/')
+    .then(response => {
+      faqs.value = response.data
+    })
+}
 </script>
 
 <style scoped>

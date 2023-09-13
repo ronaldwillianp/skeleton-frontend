@@ -33,6 +33,21 @@
           <div>{{ formatDate(props.row.fecha_modificacion) }}</div>
         </td>
       </template>
+      <template v-slot:body-cell-creada_por="props">
+        <td>
+          <div>{{ props.row.creada_por.username }}</div>
+        </td>
+      </template>
+      <template v-slot:body-cell-estado="props">
+        <td>
+          <div>{{ props.row.estado.nombre }}</div>
+        </td>
+      </template>
+      <template v-slot:body-cell-categoria="props">
+        <td>
+          <div v-for="item in props.row.categoria">{{ item.nombre }}</div>
+        </td>
+      </template>
 
       <template v-slot:top-right>
         <q-btn class="bg-primary text-white" @click="$router.push({path:'/add-noticia'})">
@@ -44,6 +59,9 @@
       <template v-slot:body-cell-opciones="props">
         <q-td :props="props">
           <div>
+            <q-btn class="q-ma-sm bg-primary text-white" @click="showNoticiasItem(props.row)">
+              <q-icon name="visibility" class=""></q-icon>
+            </q-btn>
             <q-btn class="q-ma-sm bg-primary text-white" @click="$router.push({path:'/edit-noticias/' + props.row.id})">
               <q-icon name="edit" class="q-mr-sm"></q-icon>
               Editar
@@ -65,14 +83,14 @@
           <div>{{ noticiaItem.fecha_creacion }}</div>
           <div class="row items-center q-ml-md">
             <div
-              class="tw-rounded-full tw-text-black tw-text-xs tw-bg-gray-50 tw-px-3 tw-py-1.5 tw-font-medium tw-text-gray-600 hover:tw-bg-gray-100">
+              class="tw-rounded-full tw-text-black tw-text-sm tw-bg-gray-50 tw-px-3 tw-py-1.5 tw-font-medium tw-text-gray-600 hover:tw-bg-gray-100">
               Explosiones
             </div>
           </div>
         </div>
         <q-card-section class="q-pt-sm">
           <div class="text-h6">{{ noticiaItem.titulo }}</div>
-          <div class="text-subtitle2">{{ noticiaItem.descripcion }}</div>
+          <div class="text-subtitle2 tw-text-gray-500 tw-mt-2">{{ noticiaItem.descripcion }}</div>
         </q-card-section>
         <q-card-section>
           <div class="tw-relative tw-flex tw-items-center tw-gap-x-4">
@@ -94,6 +112,9 @@
       </q-card>
     </q-dialog>
   </div>
+  <pre>
+    {{ noticias }}
+  </pre>
 </template>
 
 <script setup>
@@ -117,7 +138,7 @@ const columns = [
   {name: 'fecha_modificacion', align: 'left', label: 'Fecha Modificación', field: 'fecha_modificacion', sortable: true},
   {name: 'creada_por', align: 'left', label: 'Creada', field: 'creada_por', sortable: true},
   {name: 'estado', align: 'left', label: 'Estado', field: 'estado', sortable: true},
-  // {name: 'categoria', align: 'left', label: 'Categoría', field: 'categoria', sortable: false},
+  {name: 'categoria', align: 'left', label: 'Categoría', field: 'categoria', sortable: false},
   {name: 'opciones', align: 'left', label: 'Opciones', field: 'opciones', sortable: false},
 ]
 

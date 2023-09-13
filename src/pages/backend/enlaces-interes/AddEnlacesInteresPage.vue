@@ -68,7 +68,7 @@ const storeEnlacesInteres = () => {
       .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Enlace de Interés creado correctamente.',
+        message: 'Enlace creado correctamente.',
         position: 'top-right',
         progress: true,
       })

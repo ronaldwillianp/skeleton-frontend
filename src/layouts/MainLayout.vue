@@ -221,12 +221,12 @@ const menuList = [
   },
   {
     icon: 'newspaper',
-    label: 'Noticias',
+    label: 'Social',
     separator: false,
     path: '/noticias',
     groups: ['Administrador'],
     children: [
-      {label: 'Noticias Listado', path: '/noticias'},
+      {label: 'Noticias', path: '/noticias'},
       {label: 'Categorias', path: '/categorias'},
       {label: 'Estados', path: '/estados'},
     ]
