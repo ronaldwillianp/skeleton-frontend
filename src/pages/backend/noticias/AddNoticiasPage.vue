@@ -30,7 +30,7 @@
               <q-select outlined v-model="selectCategoria" transition-show="jump-up"
                         transition-hide="jump-up" label="Seleccione una categoría" option-value="id"
                         option-label="nombre"
-                        :options="categorias" multiple
+                        :options="categorias" emit-value map-options multiple
                         :rules="[rules.requiredSelect]"
               >
                 <template v-slot:no-option>
@@ -99,9 +99,9 @@ const router = useRouter()
 const form = ref({
   titulo: '',
   descripcion: '',
-  creada_por: '',
-  estado: '',
-  categoria: []
+  creada_por_info: '',
+  estado_info: '',
+  categoria_info: []
 })
 
 onMounted(() => {

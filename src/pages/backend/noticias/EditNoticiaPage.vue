@@ -99,10 +99,11 @@ const $q = useQuasar()
 const form = ref({
   titulo: '',
   descripcion: '',
-  creada_por: '',
-  estado: '',
-  categoria: ''
+  creada_por_info: '',
+  estado_info: '',
+  categoria_info: []
 })
+
 
 const user = UserStore()
 const router = useRouter()
@@ -120,7 +121,7 @@ const updateNoticia = () => {
     descripcion: form.value.descripcion,
     creada_por: user.user.id,
     estado: selectEstado.value,
-    categoria: selectCategoria.value.id
+    categoria: selectCategoria.value
   }
   api.patch('/social/noticia/' + noticia_id + '/', formNoticias)
     .then(response => {
@@ -147,13 +148,7 @@ const getNoticias = () => {
   api.get('/social/noticia/' + noticia_id + '/').then(response => {
     form.value = response.data
     selectEstado.value = form.value.estado
-    for (const props in form.value) {
-      if (Array.isArray(form.value[props])) {
-        for (const item of form.value[props]) {
-          selectCategoria.value = [item]
-        }
-      }
-    }
+    selectCategoria.value = form.value.categoria
   }).catch(error => Promise.reject(error))
 }
 

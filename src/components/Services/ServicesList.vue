@@ -2,15 +2,15 @@
   <div class="tw-bg-white tw-py-24 sm:tw-py-20">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-7 lg:px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
-        <h2 class="tw-text-base tw-font-semibold tw-leading-7 tw-text-indigo-600">
+        <h2 class="title tw-text-base tw-font-semibold tw-leading-7 tw-text-indigo-600">
           Servicios
         </h2>
         <p
-          class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
+          class="title2 tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
         >
           Nuetro grupo empresarial ofrece diversos servicios
         </p>
-        <p class="tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">
+        <p class="a tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">
           Nuestras empresas están dedicadas unicamente a satisfacer todas sus
           necesidades brindando servicios de calidad y exelencia garantizadas
         </p>
@@ -22,9 +22,9 @@
           <div
             v-for="feature in features"
             :key="feature.name"
-            class="tw-relative tw-pl-16"
+            class="tw-relative tw-pl-16 features"
           >
-            <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900">
+            <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 item">
               <div
                 class="tw-absolute tw-left-0 tw-top-0 tw-flex tw-h-10 tw-w-10 tw-items-center tw-justify-center tw-rounded-lg tw-bg-indigo-600"
               >
@@ -36,7 +36,7 @@
               </div>
               {{ feature.name }}
             </dt>
-            <dd class="tw-mt-2 tw-text-base tw-leading-7 tw-text-gray-600">
+            <dd class="tw-mt-2 tw-text-base tw-leading-7 tw-text-gray-600 item2">
               {{ feature.description }}
             </dd>
           </div>
@@ -55,6 +55,8 @@ import {
   WifiIcon,
   UsersIcon,
 } from "@heroicons/vue/24/outline";
+import ScrollReveal from 'scrollreveal';
+import {onMounted} from "vue";
 
 const features = [
   {
@@ -94,8 +96,54 @@ const features = [
     icon: UsersIcon,
   },
 ];
+
+onMounted(() => {
+  const sr = ScrollReveal({
+    reset: true,
+    duration: 2000
+  })
+
+  sr.reveal('.title', {
+    origin: 'top',
+    distance: '50px',
+  })
+  sr.reveal('.title2', {
+    origin: 'top',
+    distance: '55px',
+  })
+  sr.reveal('.a', {
+    origin: 'top',
+    distance: '60px',
+  })
+
+  // Services
+  sr.reveal('.features', {
+    origin: 'top left',
+    distance: '-50px',
+    interval: 200
+  })
+})
+
 </script>
 
 <style scoped>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
+body {
+  padding: 0 200px;
+  background: #0e141f;
+}
+
+.tile {
+  float: left;
+  background: #7988a4;
+  width: 4rem;
+  margin: 0.1rem;
+  height: 4rem;
+  border-radius: 0.1rem;
+}
 </style>

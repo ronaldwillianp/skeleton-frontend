@@ -33,19 +33,19 @@
           <div>{{ formatDate(props.row.fecha_modificacion) }}</div>
         </td>
       </template>
-      <template v-slot:body-cell-creada_por="props">
+      <template v-slot:body-cell-creada_por_info="props">
         <td>
-          <div>{{ props.row.creada_por.username }}</div>
+          <div>{{ props.row.creada_por_info.username }}</div>
         </td>
       </template>
-      <template v-slot:body-cell-estado="props">
+      <template v-slot:body-cell-estado_info="props">
         <td>
-          <div>{{ props.row.estado.nombre }}</div>
+          <div>{{ props.row.estado_info?.nombre }}</div>
         </td>
       </template>
-      <template v-slot:body-cell-categoria="props">
+      <template v-slot:body-cell-categoria_info="props">
         <td>
-          <div v-for="item in props.row.categoria">{{ item.nombre }}</div>
+          <q-badge v-for="item in props.row.categoria_info" class="tw-mr-2">{{ item.nombre }}</q-badge>
         </td>
       </template>
 
@@ -112,9 +112,6 @@
       </q-card>
     </q-dialog>
   </div>
-  <pre>
-    {{ noticias }}
-  </pre>
 </template>
 
 <script setup>
@@ -136,9 +133,9 @@ const columns = [
   {name: 'descripcion', align: 'left', label: 'Descripción', field: 'descripcion', sortable: true},
   {name: 'fecha_creacion', align: 'left', label: 'Fecha Creación', field: 'fecha_creacion', sortable: true},
   {name: 'fecha_modificacion', align: 'left', label: 'Fecha Modificación', field: 'fecha_modificacion', sortable: true},
-  {name: 'creada_por', align: 'left', label: 'Creada', field: 'creada_por', sortable: true},
-  {name: 'estado', align: 'left', label: 'Estado', field: 'estado', sortable: true},
-  {name: 'categoria', align: 'left', label: 'Categoría', field: 'categoria', sortable: false},
+  {name: 'creada_por_info', align: 'left', label: 'Creada', field: 'creada_por_info', sortable: true},
+  {name: 'estado_info', align: 'left', label: 'Estado', field: 'estado_info', sortable: true},
+  {name: 'categoria_info', align: 'left', label: 'Categoría', field: 'categoria_info', sortable: false},
   {name: 'opciones', align: 'left', label: 'Opciones', field: 'opciones', sortable: false},
 ]
 

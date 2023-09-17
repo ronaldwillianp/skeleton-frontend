@@ -64,7 +64,7 @@ const form = ref({
   descripcion: '',
 })
 
-const storeCategoria = () => {
+const storeEstado = () => {
     api.post('/social/estado_noticia/', form.value)
       .then(response => {
       $q.notify({
