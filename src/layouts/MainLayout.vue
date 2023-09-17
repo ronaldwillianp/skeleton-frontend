@@ -94,9 +94,8 @@
           <q-list v-else>
             <q-expansion-item
               expand-separator
-              icon="newspaper"
+              :icon="menuItem.icon"
               :label="menuItem.label"
-
             >
               <q-item v-for="item in menuItem.children" :to="item.path">
                 <q-item-section avatar>
@@ -244,6 +243,16 @@ const menuList = [
     separator: false,
     path: '/enlaces-interes',
     groups: ['Administrador']
+  },
+  {
+    icon: 'comment',
+    label: 'Comentarios',
+    separator: false,
+    groups: ['Administrador'],
+    children: [
+       {label: 'Noticias', path: '/comentarios-noticias'},
+       {label: 'Estado', path: '/comentarios-estados'},
+    ]
   },
 ]
 

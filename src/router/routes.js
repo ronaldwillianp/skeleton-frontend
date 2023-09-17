@@ -159,6 +159,26 @@ const routes = [
         meta: {groups: ['Administrador']},
         component: () => import('pages/backend/enlaces-interes/EditEnlacesInteresPage.vue')
       },
+
+    //  Comentarios Estados
+       {
+        path: '/comentarios-estados',
+        name: "comentarios-estados",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/estados/ComentariosEstadosPage.vue')
+      },
+      {
+        path: '/add-comentario-estado',
+        name: "add-comentarios-estados",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/estados/AddComentariosEstadosPage.vue')
+      },
+      {
+        path: '/edit-comentario-estado/:id',
+        name: "edit-comentarios-estados",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/estados/EditComentariosEstadosPage.vue')
+      },
     ]
   },
   {
