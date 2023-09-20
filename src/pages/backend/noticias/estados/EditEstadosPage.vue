@@ -74,7 +74,7 @@ const getCategorias = () => {
 }
 
 const updateEstado = () => {
-  api.patch('/social/estado_noticia/' + estado_id + '/', form.value)
+  api.put('/social/estado_noticia/' + estado_id + '/', form.value)
     .then(response => {
       $q.notify({
         type: 'positive',

@@ -75,7 +75,7 @@ const getComentariosEstados = () => {
 }
 
 const updateComentarioEstado = () => {
-  api.patch('/social/estado_comentario/' + comentario_estado_id + '/', form.value)
+  api.put('/social/estado_comentario/' + comentario_estado_id + '/', form.value)
     .then(response => {
       $q.notify({
         type: 'positive',

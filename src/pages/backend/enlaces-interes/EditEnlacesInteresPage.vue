@@ -74,7 +74,7 @@ const getEnlaceInteres = () => {
 }
 
 const updateEnlaceInteres = () => {
-  api.patch('/social/enlace_interes/' + enlace_id + '/', form.value)
+  api.put('/social/enlace_interes/' + enlace_id + '/', form.value)
     .then(response => {
       $q.notify({
         type: 'positive',

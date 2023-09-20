@@ -160,8 +160,8 @@ const routes = [
         component: () => import('pages/backend/enlaces-interes/EditEnlacesInteresPage.vue')
       },
 
-    //  Comentarios Estados
-       {
+      //  Comentarios Estados
+      {
         path: '/comentarios-estados',
         name: "comentarios-estados",
         meta: {groups: ['Administrador']},
@@ -178,6 +178,26 @@ const routes = [
         name: "edit-comentarios-estados",
         meta: {groups: ['Administrador']},
         component: () => import('pages/backend/comentarios/estados/EditComentariosEstadosPage.vue')
+      },
+
+       //  Comentarios Noticias
+      {
+        path: '/comentarios-noticias',
+        name: "comentarios-noticias",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/noticias/ComentariosNoticiasPage.vue')
+      },
+      {
+        path: '/add-comentario-noticia',
+        name: "add-comentarios-noticia",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/noticias/AddcomentariosNoticiasPage.vue')
+      },
+      {
+        path: '/edit-comentario-noticia/:id',
+        name: "edit-comentarios-noticia",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/comentarios/noticias/EditComentariosNoticiaPage.vue')
       },
     ]
   },

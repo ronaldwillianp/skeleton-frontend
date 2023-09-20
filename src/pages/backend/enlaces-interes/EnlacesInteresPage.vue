@@ -41,10 +41,6 @@
     </q-table>
     <DeleteDialog :is-open="isOpenDelete" @delete="deleteEnlacesInteres" @closeDialog="isOpenDelete = false"/>
   </div>
-
-  <pre>
-    {{enlaces}}
-  </pre>
 </template>
 
 <script setup>

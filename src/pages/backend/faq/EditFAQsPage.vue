@@ -74,7 +74,7 @@ const getFaq = () => {
 }
 
 const updateFaq = () => {
-  api.patch('/social/faq/' + faq_id + '/', form.value)
+  api.put('/social/faq/' + faq_id + '/', form.value)
     .then(response => {
       $q.notify({
         type: 'positive',

@@ -149,12 +149,8 @@ const user_id = router.currentRoute.value.params.id
 let list_groups = ref([])
 
 const editUser = () => {
-  // for(let i in userForm.value.model){
-  //   userForm.value.groups.push(i.id)
-  // }
 
-
-  api.patch('http://localhost:8000/api/v1.0/administracion/user/' + user_id + '/', userForm.value)
+  api.put('http://localhost:8000/api/v1.0/administracion/user/' + user_id + '/', userForm.value)
     .then(response => {
       $q.notify({
         type: 'positive',

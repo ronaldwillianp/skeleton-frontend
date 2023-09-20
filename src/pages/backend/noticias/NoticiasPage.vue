@@ -14,7 +14,7 @@
     >
       <template v-slot:body-cell-titulo="props">
         <td>
-          <div class="tw-w-58 ellipsis">{{ props.row.titulo }}</div>
+          <div class="tw-w-56 ellipsis">{{ props.row.titulo }}</div>
         </td>
       </template>
       <template v-slot:body-cell-descripcion="props">
@@ -80,7 +80,7 @@
       <q-card class="my-card">
         <img src="https://cdn.quasar.dev/img/mountains.jpg">
         <div class="row items-center q-mt-xs q-px-md">
-          <div>{{ noticiaItem.fecha_creacion }}</div>
+          <div>{{ formatDate(noticiaItem.fecha_creacion) }}</div>
           <div class="row items-center q-ml-md">
             <div
               class="tw-rounded-full tw-text-black tw-text-sm tw-bg-gray-50 tw-px-3 tw-py-1.5 tw-font-medium tw-text-gray-600 hover:tw-bg-gray-100">

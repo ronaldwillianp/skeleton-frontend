@@ -49,9 +49,8 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {ref} from 'vue'
 import {useQuasar} from "quasar";
-import {UserStore} from "stores/user-store";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
 import rules from '../../../../utils/rules'
@@ -65,8 +64,8 @@ const form = ref({
 })
 
 const storeComentarioEstado = () => {
-    api.post('/social/estado_comentario/', form.value)
-      .then(response => {
+  api.post('/social/estado_comentario/', form.value)
+    .then(response => {
       $q.notify({
         type: 'positive',
         message: 'Comentario de Estado creado correctamente.',
