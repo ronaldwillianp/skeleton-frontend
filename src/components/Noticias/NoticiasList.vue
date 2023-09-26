@@ -2,11 +2,8 @@
   <div class="tw-py-24 sm:tw-py-20">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
-        <h2 class="tw-text-base tw-font-semibold tw-leading-7 tw-text-indigo-600">
-          Noticias
-        </h2>
         <p
-          class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
+          class="titleNoticias tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
         >
           Nuestro aconetecer informátivo
         </p>
@@ -17,7 +14,7 @@
         <article
           v-for="post in posts"
           :key="post.id"
-          class="tw-flex tw-max-w-xl tw-flex-col tw-items-start tw-justify-between"
+          class="posts tw-flex tw-max-w-xl tw-flex-col tw-items-start tw-justify-between"
         >
           <div class="tw-w-full">
             <img
@@ -72,6 +69,9 @@
 </template>
 
 <script setup>
+import {onMounted} from "vue";
+import ScrollReveal from "scrollreveal";
+
 const posts = [
   {
     id: 1,
@@ -126,6 +126,24 @@ const posts = [
   },
   // More posts...
 ];
+
+onMounted(() => {
+  const sr = ScrollReveal({
+    reset: true,
+    duration: 2000
+  })
+
+  sr.reveal('.titleNoticias', {
+    origin: 'top',
+    distance: '55px',
+  })
+
+  sr.reveal('.posts', {
+    origin: 'right',
+    distance: '-50px',
+    interval: 200
+  })
+})
 </script>
 
 <style scoped>

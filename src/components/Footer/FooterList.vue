@@ -1,10 +1,10 @@
 <template>
-  <footer class="tw-bg-gray-900 body-font">
+  <footer class="tw-bg-primary">
     <div
       class="tw-max-w-7xl tw-px-5 tw-py-24 tw-mx-auto tw-flex md:tw-items-center lg:tw-items-start md:tw-flex-row md:tw-flex-nowrap tw-flex-wrap tw-flex-col">
       <div class="tw-w-64 tw-flex-shrink-0 md:tw-mx-0 tw-mx-auto tw-text-center md:tw-text-left">
         <a
-          class="tw-flex tw-title-font tw-font-medium tw-items-center md:tw-justify-start tw-justify-center tw-text-white">
+          class="tw-flex tw-font-medium tw-items-center md:tw-justify-start tw-justify-center tw-text-white">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
                stroke-linejoin="round" stroke-width="2"
                class="tw-w-10 tw-h-10 tw-text-white tw-p-2 tw-bg-indigo-500 tw-rounded-full"

@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-py-24 sm:tw-py-32">
+  <div v-show="faqs.length > 0" class="tw-py-24 sm:tw-py-32">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8 lg:tw-text-center">
       <p
         class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
@@ -55,6 +55,7 @@ function getFAQ () {
   api.get('/social/faq/')
     .then(response => {
       faqs.value = response.data
+      console.log(response.data)
     })
 }
 </script>

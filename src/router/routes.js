@@ -160,6 +160,26 @@ const routes = [
         component: () => import('pages/backend/enlaces-interes/EditEnlacesInteresPage.vue')
       },
 
+       // Enlaces Categorias
+       {
+        path: '/enlaces-categorias',
+        name: "enlaces-categorias",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/enlaces-interes/categorias/EnlacesCategoriaPage.vue')
+      },
+      {
+        path: '/add-enlaces-categorias',
+        name: "add-enlaces-categorias",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/enlaces-interes/categorias/AddEnlacesCategoriaPage.vue')
+      },
+      {
+        path: '/edit-enlaces-categorias/:id',
+        name: "edit-enlaces-categorias",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/enlaces-interes/categorias/EditEnlacesCategoriaPage.vue')
+      },
+
       //  Comentarios Estados
       {
         path: '/comentarios-estados',

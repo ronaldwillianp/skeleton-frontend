@@ -1,8 +1,9 @@
 <template>
-  <CarouselHeroSection/>
+<!--  <CarouselHeroSection/>-->
+  <HeroSection/>
   <AboutEmpresa/>
   <ServicesList/>
-  <CarouselCompany/>
+<!--  <CarouselCompany/>-->
   <NoticiasList />
   <TeamList />
   <ContactItem />
@@ -11,6 +12,7 @@
 </template>
 
 <script setup>
+import HeroSection from 'components/Hero/HeroSection.vue'
 import CarouselHeroSection from 'components/Carousel/CarouselHeroSection.vue'
 import AboutEmpresa from 'components/About/AboutEmpresa.vue'
 import ServicesList from "components/Services/ServicesList.vue";

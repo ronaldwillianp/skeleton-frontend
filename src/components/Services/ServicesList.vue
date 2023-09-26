@@ -2,11 +2,8 @@
   <div class="tw-bg-white tw-py-24 sm:tw-py-20">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-7 lg:px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
-        <h2 class="title tw-text-base tw-font-semibold tw-leading-7 tw-text-indigo-600">
-          Servicios
-        </h2>
         <p
-          class="title2 tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
+          class="title tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
         >
           Nuetro grupo empresarial ofrece diversos servicios
         </p>
@@ -26,11 +23,11 @@
           >
             <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 item">
               <div
-                class="tw-absolute tw-left-0 tw-top-0 tw-flex tw-h-10 tw-w-10 tw-items-center tw-justify-center tw-rounded-lg tw-bg-indigo-600"
+                class="tw-absolute tw-left-0 tw-top-0 tw-flex tw-h-11 tw-w-11 tw-items-center tw-justify-center tw-rounded-lg tw-bg-primaryClaro"
               >
                 <component
                   :is="feature.icon"
-                  class="tw-h-6 tw-w-6 tw-text-white"
+                  class="tw-h-6 tw-w-6 tw-text-black"
                   aria-hidden="true"
                 />
               </div>
@@ -105,10 +102,6 @@ onMounted(() => {
 
   sr.reveal('.title', {
     origin: 'top',
-    distance: '50px',
-  })
-  sr.reveal('.title2', {
-    origin: 'top',
     distance: '55px',
   })
   sr.reveal('.a', {
@@ -118,7 +111,7 @@ onMounted(() => {
 
   // Services
   sr.reveal('.features', {
-    origin: 'top left',
+    origin: 'top right',
     distance: '-50px',
     interval: 200
   })
@@ -127,23 +120,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
 
-body {
-  padding: 0 200px;
-  background: #0e141f;
-}
-
-.tile {
-  float: left;
-  background: #7988a4;
-  width: 4rem;
-  margin: 0.1rem;
-  height: 4rem;
-  border-radius: 0.1rem;
-}
 </style>

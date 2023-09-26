@@ -10,12 +10,12 @@
 
       <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
     </q-toolbar> -->
-    <header>
+    <header class="tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-heroBg tw-z-50">
       <nav
-        class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-px-16 tw-container tw-mx-auto"
+        class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-px-7 md:tw-px-16 tw-container tw-mx-auto"
       >
         <div class="tw-flex lg:tw-flex-1">
-          <a href="#" class="-tw-m-1.5 tw-p-1.5">
+          <a href="#" class="-tw-m-1.5 tw-p-1.5 focus:tw-outline-none">
             <span class="tw-sr-only">Gelma</span>
             <img
               class="tw-h-8 tw-w-auto"
@@ -39,7 +39,7 @@
             v-for="item in navigation"
             :key="item.name"
             :href="item.href"
-            class="tw-text-sm tw-font-semibold tw-leading-6 tw-gray-900 hover:tw-text-gray-200 tw-transition-all"
+            class="tw-text-sm tw-font-semibold tw-leading-6 tw-gray-900 hover:tw-text-gray-200 focus:tw-outline-none"
           >
             {{ item.name }}
           </a>
@@ -47,8 +47,8 @@
         <div class="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
           <router-link
             to="/login"
-            class="tw-text-sm tw-font-medium tw-leading-6 tw-text-white tw-px-4 tw-py-2 tw-bg-gray-900 hover:tw-text-gray-200 tw-transition-all"
-          >Log in <span aria-hidden="true">&rarr;</span>
+            class="tw-text-sm tw-font-medium tw-rounded focus:tw-outline-none tw-leading-6 tw-text-white tw-px-4 tw-py-2 tw-bg-primary hover:tw-bg-hoverPrimary tw-transition-all"
+          >Autenticarse
           </router-link
           >
           <!--          <router-link-->

@@ -239,10 +239,13 @@ const menuList = [
   },
   {
     icon: 'link',
-    label: 'Enlaces de Interes',
+    label: 'Direcciones URL',
     separator: false,
-    path: '/enlaces-interes',
-    groups: ['Administrador']
+    groups: ['Administrador'],
+    children: [
+      {label: 'Enlaces de Interés', path: '/enlaces-interes' },
+      {label: 'Categorías', path: '/enlaces-categorias' },
+    ]
   },
   {
     icon: 'comment',
