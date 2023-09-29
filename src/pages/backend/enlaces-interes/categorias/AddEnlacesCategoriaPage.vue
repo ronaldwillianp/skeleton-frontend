@@ -25,22 +25,6 @@
                 type="text"
               />
             </div>
-            <div class="col-xs-12 col-sm-6">
-              <q-select outlined v-model="selectEnlace" transition-show="jump-up"
-                        transition-hide="jump-up" label="Seleccione un enlace" option-value="id"
-                        option-label="nombre"
-                        :options="enlaces"  multiple
-                        :rules="[rules.requiredSelect]"
-              >
-                <template v-slot:no-option>
-                  <q-item>
-                    <q-item-section class="text-grey">
-                      No existen elementos
-                    </q-item-section>
-                  </q-item>
-                </template>
-              </q-select>
-            </div>
           </div>
 
           <q-btn
@@ -74,31 +58,25 @@ import rules from '../../../../utils/rules'
 const $q = useQuasar()
 const router = useRouter()
 const enlaces = ref([])
-const selectEnlace = ref(null)
 
 const form = ref({
   nombre: '',
   descripcion: '',
-  enlaces: []
 })
 
-onMounted(() => {
-  getEnlaces()
-})
 
 const storeEnlacesCategoria = () => {
 
   const formEnlacesCategorias = {
     nombre: form.value.nombre,
     descripcion: form.value.descripcion,
-    enlaces: selectEnlace.value
   }
 
   api.post('/social/categoria_enlace_interes/', formEnlacesCategorias)
     .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Categoría deEnlace creado correctamente.',
+        message: 'Categoría de Enlace creada correctamente.',
         position: 'top-right',
         progress: true,
       })
@@ -124,14 +102,6 @@ const storeEnlacesCategoria = () => {
         })
       }
     })
-}
-
-const getEnlaces = () => {
-  api.get('/social/enlace_interes/')
-    .then(response => {
-      enlaces.value = response.data
-    })
-    .catch(error => console.log(error))
 }
 </script>
 

@@ -54,6 +54,9 @@
                 Eliminar
               </q-btn>
             </div>
+            <div class="ellipsis tw-w-44" v-else-if="col.name === 'descripcion'">
+              {{ col.value }}
+            </div>
             <div v-else>
               {{ col.value }}
             </div>
@@ -103,6 +106,7 @@ const {
 
 const columns = [
   {name: 'nombre', align: 'left', label: 'Nombre', field: 'nombre', sortable: true},
+  {name: 'descripcion', align: 'left', label: 'Descripción', field: 'descripcion', sortable: true},
   {name: 'opciones', align: 'left', label: 'Opciones', field: 'opciones', sortable: false},
 ]
 const columnsEnlaces = [
@@ -137,7 +141,7 @@ const deleteEnlacesCategorias = () => {
   api.delete('/social/categoria_enlace_interes/' + deleteEnlacesCategoriaId.value.id + '/').then(response => {
     $q.notify({
       type: 'positive',
-      message: 'Categoría de Enlace eliminado correctamente.',
+      message: 'Categoría de Enlace eliminada correctamente.',
       position: 'top-right',
       progress: true,
     })

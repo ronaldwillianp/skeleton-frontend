@@ -2,10 +2,10 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Editar Enlace de Inerés
+        Editar Categoría de Enlace
       </q-card-section>
       <q-card-section>
-        <q-form @submit="updateEnlaceInteres">
+        <q-form @submit="updateCategoriaEnlace">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
               <q-input
@@ -20,15 +20,15 @@
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.enlace"
-                label="Dirección URL"
+                v-model="form.descripcion"
+                label="Descripción"
                 type="text"
               />
             </div>
           </div>
 
           <q-btn
-            @click="$router.push({path:'/enlaces-interes'})"
+            @click="$router.push({path:'/enlaces-categorias'})"
             type="button"
             color="negative"
             class="text-white q-mr-sm">
@@ -57,33 +57,33 @@ import rules from '../../../../utils/rules'
 
 const $q = useQuasar()
 const router = useRouter()
-const enlace_id = router.currentRoute.value.params.id
+const categoria_id = router.currentRoute.value.params.id
 
 const form = ref({
   nombre: '',
-  enlace: '',
+  descripcion: '',
 })
 
 onMounted(() => {
-  getEnlaceInteres()
+  getCategoriaEnlace()
 })
-const getEnlaceInteres = () => {
-  api.get(`/social/enlace_interes/` + enlace_id + "/").then(response => {
+const getCategoriaEnlace = () => {
+  api.get(`/social/categoria_enlace_interes/` + categoria_id + "/").then(response => {
     form.value = response.data
   })
 }
 
-const updateEnlaceInteres = () => {
-  api.put('/social/enlace_interes/' + enlace_id + '/', form.value)
+const updateCategoriaEnlace = () => {
+  api.put('/social/categoria_enlace_interes/' + categoria_id + '/', form.value)
     .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Enlace editado correctamente.',
+        message: 'Categoría de Enlace editada correctamente.',
         position: 'top-right',
         progress: true,
       })
 
-      router.push({path: '/enlaces-interes'})
+      router.push({path: '/enlaces-categorias'})
     })
     .catch(error => {
       if (error.response.data) {
