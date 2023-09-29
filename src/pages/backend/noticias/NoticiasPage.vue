@@ -115,7 +115,7 @@
 </template>
 
 <script setup>
-import {computed, ref} from 'vue'
+import {ref} from 'vue'
 import {useQuasar} from "quasar";
 import {api} from "boot/axios";
 import {onMounted} from "vue";
