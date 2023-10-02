@@ -25,6 +25,22 @@
                 type="text"
               />
             </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-select outlined v-model="selectCategoria" transition-show="jump-up"
+                        transition-hide="jump-up" label="Seleccione una categoría" option-value="id"
+                        option-label="nombre"
+                        :options="categorias"
+                        :rules="[rules.requiredSelect]"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">
+                      No existen elementos
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
+            </div>
           </div>
 
           <q-btn
@@ -49,7 +65,7 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import {useQuasar} from "quasar";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
@@ -57,43 +73,65 @@ import rules from '../../../utils/rules'
 
 const $q = useQuasar()
 const router = useRouter()
+const categorias = ref([])
+const selectCategoria = ref(null)
 
 const form = ref({
   nombre: '',
   enlace: '',
+  categoria_info: []
 })
 
-const storeEnlacesInteres = () => {
-    api.post('/social/enlace_interes/', form.value)
-      .then(response => {
-      $q.notify({
-        type: 'positive',
-        message: 'Enlace creado correctamente.',
-        position: 'top-right',
-        progress: true,
-      })
+onMounted(() => {
+  getCategorias()
+})
 
-      router.push({path: '/enlaces-interes'})
-    })
-    .catch(error => {
-      if (error.response.data) {
-        for (let i in error.response.data) {
-          $q.notify({
-            type: 'negative',
-            message: error.response.data[i],
-            position: 'top-right',
-            progress: true,
-          })
-        }
-      } else {
-        $q.notify({
-          type: 'negative',
-          message: error.response,
-          position: 'top-right',
-          progress: true,
-        })
-      }
-    })
+const getCategorias = () => {
+  api.get('/social/categoria_enlace_interes/').then(response => {
+    categorias.value = response.data
+  })
+    .catch(error => console.log(error))
+}
+
+const storeEnlacesInteres = () => {
+
+  const formEnlaces = {
+    nombre: form.value.nombre,
+    enlace: form.value.enlace,
+    categoria_info: selectCategoria.value
+  }
+
+  console.log(selectCategoria.value)
+  // api.post('/social/enlace_interes/', formEnlaces)
+  //   .then(response => {
+  //     $q.notify({
+  //       type: 'positive',
+  //       message: 'Enlace creado correctamente.',
+  //       position: 'top-right',
+  //       progress: true,
+  //     })
+  //
+  //     router.push({path: '/enlaces-interes'})
+  //   })
+  //   .catch(error => {
+  //     if (error.response.data) {
+  //       for (let i in error.response.data) {
+  //         $q.notify({
+  //           type: 'negative',
+  //           message: error.response.data[i],
+  //           position: 'top-right',
+  //           progress: true,
+  //         })
+  //       }
+  //     } else {
+  //       $q.notify({
+  //         type: 'negative',
+  //         message: error.response,
+  //         position: 'top-right',
+  //         progress: true,
+  //       })
+  //     }
+  //   })
 }
 </script>
 

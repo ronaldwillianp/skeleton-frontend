@@ -3,7 +3,7 @@
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
         <p
-          class="titleNoticias tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
+          class="title tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
         >
           Nuestro aconetecer informátivo
         </p>
@@ -71,29 +71,15 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import ScrollReveal from "scrollreveal";
+// import ScrollReveal from "scrollreveal";
 import {api} from "boot/axios";
 import dayjs from "dayjs";
 import locale from 'src/utils/esDate'
+import 'src/utils/scrollReveal'
 
 const noticias = ref([])
 
 onMounted(() => {
-  const sr = ScrollReveal({
-    reset: true,
-    duration: 2000
-  })
-
-  sr.reveal('.titleNoticias', {
-    origin: 'top',
-    distance: '55px',
-  })
-
-  sr.reveal('.posts', {
-    origin: 'right',
-    distance: '50px',
-    interval: 200
-  })
   getNoticias()
 })
 

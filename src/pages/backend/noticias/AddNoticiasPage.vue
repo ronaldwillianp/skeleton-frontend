@@ -110,7 +110,6 @@ onMounted(() => {
 })
 
 const storeNoticia = () => {
-
   const formNoticias = {
     titulo: form.value.titulo,
     descripcion: form.value.descripcion,
@@ -118,7 +117,7 @@ const storeNoticia = () => {
     estado: selectEstado.value,
     categoria: selectCategoria.value
   }
-  // console.log(formNoticias)
+
   api.post('/social/noticia/', formNoticias)
     .then(response => {
       $q.notify({

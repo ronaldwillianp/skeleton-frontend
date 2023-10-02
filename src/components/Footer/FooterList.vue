@@ -15,81 +15,20 @@
         </a>
         <p class="tw-mt-2 tw-text-sm tw-text-white">Air plant banjo lyft occupy retro adaptogen indego</p>
       </div>
+      <!-- Links -->
       <div
         class="tw-flex-grow tw-flex tw-flex-wrap md:tw-pl-20 -tw-mb-10 md:tw-mt-0 tw-mt-10 md:tw-text-left tw-text-center">
-        <div class="lg:tw-w-1/4 md:tw-w-1/2 tw-w-full tw-px-4">
-          <h2 class="tw-title-font tw-font-medium tw-text-white tw-tracking-widest tw-text-sm tw-mb-3">
-            CATEGORIES</h2>
+        <div class="lg:tw-w-1/4 md:tw-w-1/2 tw-w-full tw-px-4" v-for="link in links" :key="link.id">
+          <h2 class="tw-title-font tw-font-medium tw-uppercase tw-text-white tw-tracking-widest tw-text-sm tw-mb-3">
+            {{link.nombre}}</h2>
           <nav class="tw-list-none tw-mb-10">
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">First Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Second Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Third Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div class="lg:tw-w-1/4 md:tw-w-1/2 tw-w-full tw-px-4">
-          <h2 class="tw-title-font tw-font-medium tw-text-white tw-tracking-widest tw-text-sm tw-mb-3">
-            CATEGORIES</h2>
-          <nav class="tw-list-none tw-mb-10">
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">First Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Second Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Third Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div class="lg:tw-w-1/4 md:tw-w-1/2 tw-w-full tw-px-4">
-          <h2 class="tw-title-font tw-font-medium tw-text-white tw-tracking-widest tw-text-sm tw-mb-3">
-            CATEGORIES</h2>
-          <nav class="tw-list-none tw-mb-10">
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">First Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Second Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Third Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Fourth Link</a>
-            </li>
-          </nav>
-        </div>
-        <div class="lg:tw-w-1/4 md:tw-w-1/2 tw-w-full tw-px-4">
-          <h2 class="tw-title-font tw-font-medium tw-text-white tw-tracking-widest tw-text-sm tw-mb-3">
-            CATEGORIES</h2>
-          <nav class="tw-list-none tw-mb-10">
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">First Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Second Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Third Link</a>
-            </li>
-            <li>
-              <a class="tw-text-white hover:tw-text-gray-100">Fourth Link</a>
+            <li v-for="enlace in link.enlaces">
+              <a class="tw-text-white hover:tw-text-gray-100">{{enlace.nombre}}</a>
             </li>
           </nav>
         </div>
       </div>
+
     </div>
     <div class="tw-bg-gray-900 tw-border-t tw-border-gray-800">
       <div class="tw-container tw-mx-auto tw-py-4 tw-px-5 tw-flex tw-flex-wrap tw-flex-col sm:tw-flex-row">
@@ -129,7 +68,25 @@
   </footer>
 </template>
 
-<script>
+<script setup>
+import {onMounted, ref} from "vue";
+import {api} from "boot/axios";
+import 'src/utils/scrollReveal'
+
+const links = ref([])
+
+onMounted(() => {
+  getNoticias()
+})
+
+const getNoticias = () => {
+  api.get('/social/categoria_enlace_interes/')
+    .then(response => {
+      links.value = response.data
+      console.log(response.data)
+    })
+    .catch(error => console.log(error))
+}
 
 </script>
 
