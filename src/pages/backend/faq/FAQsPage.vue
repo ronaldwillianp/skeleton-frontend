@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-table
       flat bordered
-      title="FAQs"
+      title="Preguntas Frecuentes"
       :rows="faqs"
       :columns="columns"
       row-key="id"

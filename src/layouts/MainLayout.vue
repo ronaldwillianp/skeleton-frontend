@@ -81,7 +81,7 @@
       <q-list>
         <div v-for="(menuItem, index) in menuList" :key="index">
           <div v-if="!menuItem.children">
-            <q-item v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable
+            <q-item :target="menuItem.target" v-if="menuItem.groups.some(item=>useUserStore.user.groups.includes(item))" clickable
                     active-class="text-primary" exact v-ripple :to="menuItem.path">
               <q-item-section avatar>
                 <q-icon :name="menuItem.icon"/>
@@ -201,6 +201,7 @@ const menuList = [
     icon: 'web',
     label: 'Página Web',
     separator: true,
+    target: '_blank',
     path: '/',
     groups: ['Administrador', 'Moderador', 'Consultor']
   },
@@ -232,14 +233,14 @@ const menuList = [
   },
   {
     icon: 'quiz',
-    label: 'FAQs',
+    label: 'Preguntas Frecuentes',
     separator: false,
     path: '/faqs',
     groups: ['Administrador']
   },
   {
     icon: 'link',
-    label: 'Direcciones URL',
+    label: 'Pie de Página',
     separator: false,
     groups: ['Administrador'],
     children: [
@@ -256,6 +257,13 @@ const menuList = [
        {label: 'Noticias', path: '/comentarios-noticias'},
        {label: 'Estado', path: '/comentarios-estados'},
     ]
+  },
+  {
+    icon: 'handshake',
+    label: 'Socios',
+    separator: false,
+    groups: ['Administrador'],
+     path: '/socios',
   },
 ]
 

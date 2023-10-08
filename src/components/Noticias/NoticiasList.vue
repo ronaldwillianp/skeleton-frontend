@@ -3,13 +3,13 @@
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
         <p
-          class="title tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
+          class="titleNoticias tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
         >
           Nuestro aconetecer informátivo
         </p>
       </div>
       <div
-        class="posts tw-mx-auto tw-mt-10 tw-grid tw-max-w-2xl tw-grid-cols-1 tw-gap-x-8 tw-gap-y-16 tw-border-gray-200 tw-pt-10 sm:tw-mt-10 sm:tw-pt-8 lg:tw-mx-0 lg:tw-max-w-none lg:tw-grid-cols-3"
+        class="listNoticias tw-mx-auto tw-mt-10 tw-grid tw-max-w-2xl tw-grid-cols-1 tw-gap-x-8 tw-gap-y-16 tw-border-gray-200 tw-pt-10 sm:tw-mt-10 sm:tw-pt-8 lg:tw-mx-0 lg:tw-max-w-none lg:tw-grid-cols-3"
       >
         <article
           v-for="post in noticias"
@@ -71,7 +71,7 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-// import ScrollReveal from "scrollreveal";
+import ScrollReveal from "scrollreveal";
 import {api} from "boot/axios";
 import dayjs from "dayjs";
 import locale from 'src/utils/esDate'
@@ -81,6 +81,19 @@ const noticias = ref([])
 
 onMounted(() => {
   getNoticias()
+
+  const sr = ScrollReveal({
+    reset: true,
+    duration: 2000
+  })
+  sr.reveal('.titleNoticias', {
+    origin: 'top',
+    distance: '55px',
+  })
+  sr.reveal('.listNoticias', {
+    origin: 'left',
+    distance: '50px',
+  })
 })
 
 const getNoticias = () => {

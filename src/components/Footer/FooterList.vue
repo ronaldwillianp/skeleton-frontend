@@ -83,7 +83,6 @@ const getNoticias = () => {
   api.get('/social/categoria_enlace_interes/')
     .then(response => {
       links.value = response.data
-      console.log(response.data)
     })
     .catch(error => console.log(error))
 }

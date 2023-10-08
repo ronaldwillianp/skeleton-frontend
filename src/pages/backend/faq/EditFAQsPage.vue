@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Editar FAQ
+        Editar Pregunta Frecuente
       </q-card-section>
       <q-card-section>
         <q-form @submit="updateFaq">

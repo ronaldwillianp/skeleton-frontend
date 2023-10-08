@@ -12,7 +12,8 @@ export default {
       hoverPrimary: '#219F53',
       primaryClaro: '#D7F5DC',
       black: '#130F26',
-      white: '#FFF'
+      white: '#FFF',
+      blue: '#3b82f6'
     },
     extend: {
       animation: {

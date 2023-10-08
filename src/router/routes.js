@@ -219,6 +219,26 @@ const routes = [
         meta: {groups: ['Administrador']},
         component: () => import('pages/backend/comentarios/noticias/EditComentariosNoticiaPage.vue')
       },
+
+       // Gestion Socio
+       {
+        path: '/socios',
+        name: "Socios",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/socios/SociosPage.vue')
+      },
+      {
+        path: '/add-socios',
+        name: "add-socios",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/socios/AddSociosPage.vue')
+      },
+      {
+        path: '/edit-socios/:id',
+        name: "edit-socios",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/socios/EditSociosPage.vue')
+      },
     ]
   },
   {

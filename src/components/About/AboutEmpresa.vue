@@ -121,7 +121,6 @@ const getEmpresa = () => {
   api.get('/empresa/empresa/')
     .then(response => {
       empresas.value = response.data
-      console.log(empresas.value)
     })
     .catch(error => console.log(error))
 }

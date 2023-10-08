@@ -4,7 +4,7 @@
       class="tw-mx-auto tw-grid tw-max-w-7xl tw-gap-x-8 tw-gap-y-20 tw-px-6 lg:tw-px-8 xl:tw-grid-cols-3"
     >
       <div class="tw-max-w-2xl">
-        <h2 class="titleServices tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl">
+        <h2 class="titleServices tw-text-3xl tw-font-bold tw-tracking-tight sm:tw-text-4xl">
           Conosca a nuestros directivos
         </h2>
         <p class="subtitle tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">

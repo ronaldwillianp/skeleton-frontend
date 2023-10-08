@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <q-table
       flat bordered
-      title="Enlaces"
-      :rows="enlaces"
+      title="Socios"
+      :rows="socios"
       :columns="columns"
       row-key="id"
       :pagination-label="getPaginationLabel"
@@ -13,21 +13,31 @@
       :loading="isLoading"
     >
       <template v-slot:top-right>
-        <q-btn class="bg-primary text-white" @click="$router.push({path:'/add-enlaces-interes'})">
+        <q-btn class="bg-primary text-white" @click="$router.push({path:'/add-socios'})">
           <q-icon name="add"></q-icon>
           Agregar
         </q-btn>
       </template>
 
-      <template v-slot:body-cell-enlace="props">
+      <template v-slot:body-cell-logo="props">
         <q-td :props="props">
-          <a target="_blank" :href="props.row.enlace" class="hover:tw-underline hover:tw-text-blue">{{props.row.enlace}}</a>
+          <q-avatar square>
+            <q-img :src="props.row.logo" style="height: 50px; max-width: 195px"/>
+          </q-avatar>
         </q-td>
       </template>
+
+      <template v-slot:body-cell-web="props">
+        <q-td :props="props">
+          <a target="_blank" :href="props.row.web"
+             class="hover:tw-underline hover:tw-text-blue">{{ props.row.web }}</a>
+        </q-td>
+      </template>
+
       <template v-slot:body-cell-opciones="props">
         <q-td :props="props">
           <div>
-            <q-btn class="q-ma-sm bg-primary text-white" @click="$router.push({path:'/edit-enlaces-interes/' + props.row.id})">
+            <q-btn class="q-ma-sm bg-primary text-white" @click="$router.push({path:'/edit-socios/' + props.row.id})">
               <q-icon name="edit" class="q-mr-sm"></q-icon>
               Editar
             </q-btn>
@@ -39,7 +49,7 @@
         </q-td>
       </template>
     </q-table>
-    <DeleteDialog :is-open="isOpenDelete" @delete="deleteEnlacesInteres" @closeDialog="isOpenDelete = false"/>
+    <DeleteDialog :is-open="isOpenDelete" @delete="deleteSocio" @closeDialog="isOpenDelete = false"/>
   </div>
 </template>
 
@@ -50,7 +60,6 @@ import {api} from "boot/axios";
 import {onMounted} from "vue";
 import useTable from '../../../composables/useTable'
 import DeleteDialog from "components/DeleteDialog.vue";
-import dayjs from "dayjs";
 
 const {
   getPaginationLabel,
@@ -59,48 +68,49 @@ const {
 
 const columns = [
   {name: 'nombre', align: 'left', label: 'Nombre', field: 'nombre', sortable: true},
-  {name: 'enlace', align: 'left', label: 'Enlace', field: 'enlace', sortable: true},
+  {name: 'logo', align: 'left', label: 'Logo', field: 'logo', sortable: true},
+  {name: 'web', align: 'left', label: 'Dirección URL', field: 'web', sortable: true},
   {name: 'opciones', align: 'left', label: 'Opciones', field: 'opciones', sortable: false},
 ]
 
 const isLoading = ref(false)
 const isOpenDelete = ref(false)
-const enlaces = ref([])
-const deleteEnlacesInteresId = ref([])
+const socios = ref([])
+const deleteSociosId = ref([])
 const $q = useQuasar()
 
 onMounted(() => {
-  getEnlacesInteres()
+  getSocios()
 })
 
 const checkDelete = (row) => {
-  deleteEnlacesInteresId.value = row
+  deleteSociosId.value = row
   isOpenDelete.value = true
 }
 
-const getEnlacesInteres = () => {
+const getSocios = () => {
   isLoading.value = true
-  api.get(`/social/enlace_interes/`).then(response => {
+  api.get(`/empresa/socio/`).then(response => {
     isLoading.value = false
-    enlaces.value = response.data
+    socios.value = response.data
   })
 }
 
-const deleteEnlacesInteres = () => {
-  api.delete('/social/enlace_interes/' + deleteEnlacesInteresId.value.id + '/').then(response => {
+const deleteSocio = () => {
+  api.delete('/empresa/socio/' + deleteSociosId.value.id + '/').then(response => {
     $q.notify({
       type: 'positive',
-      message: 'Enlace eliminado correctamente.',
+      message: 'Socio eliminado correctamente.',
       position: 'top-right',
       progress: true,
     })
-      isOpenDelete.value = false
-    getEnlacesInteres()
+    isOpenDelete.value = false
+    getSocios()
   }).catch(error => {
     if (error.response.status === 404) {
       $q.notify({
         type: 'negative',
-        message: 'Enlace no encontrada en la Base de Datos. Contacte con el Administrador del sistema.',
+        message: 'Socio no encontrado en la Base de Datos. Contacte con el Administrador del sistema.',
         position: 'top-right',
         progress: true,
       })

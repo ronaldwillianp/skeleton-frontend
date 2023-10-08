@@ -3,11 +3,11 @@
     <div class="tw-mx-auto tw-max-w-7xl tw-px-7 lg:px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
         <p
-          class="title tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
+          class="titleServices tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
         >
           Nuetro grupo empresarial ofrece diversos servicios
         </p>
-        <p class="a tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">
+        <p class="subtitleServices tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">
           Nuestras empresas están dedicadas unicamente a satisfacer todas sus
           necesidades brindando servicios de calidad y exelencia garantizadas
         </p>
@@ -19,7 +19,7 @@
           <div
             v-for="feature in features"
             :key="feature.name"
-            class="tw-relative tw-pl-16 features"
+            class="list tw-relative tw-pl-16 listWithInterval"
           >
             <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 item">
               <div
@@ -54,6 +54,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import ScrollReveal from 'scrollreveal';
 import {onMounted} from "vue";
+import 'src/utils/scrollReveal'
 
 const features = [
   {
@@ -99,24 +100,21 @@ onMounted(() => {
     reset: true,
     duration: 2000
   })
-
-  sr.reveal('.title', {
+   sr.reveal('.titleServices', {
     origin: 'top',
     distance: '55px',
   })
-  sr.reveal('.a', {
+  sr.reveal('.subtitleServices', {
     origin: 'top',
-    distance: '60px',
+    distance: '65px',
+  })
+  sr.reveal('.list', {
+   origin: 'left',
+    distance: '50px',
+    interval: 300
   })
 
-  // Services
-  sr.reveal('.features', {
-    origin: 'top right',
-    distance: '-50px',
-    interval: 200
-  })
 })
-
 </script>
 
 <style scoped>
