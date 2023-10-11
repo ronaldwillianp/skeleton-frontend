@@ -17,24 +17,25 @@
           class="tw-grid tw-max-w-xl tw-grid-cols-1 tw-gap-x-10 tw-gap-y-10 lg:tw-max-w-none lg:tw-grid-cols-2 lg:tw-gap-y-16"
         >
           <div
-            v-for="feature in features"
-            :key="feature.name"
+            v-for="feature in servicios"
+            :key="feature.id"
             class="list tw-relative tw-pl-16 listWithInterval"
           >
             <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 item">
               <div
                 class="tw-absolute tw-left-0 tw-top-0 tw-flex tw-h-11 tw-w-11 tw-items-center tw-justify-center tw-rounded-lg tw-bg-primaryClaro"
               >
-                <component
-                  :is="feature.icon"
-                  class="tw-h-6 tw-w-6 tw-text-black"
-                  aria-hidden="true"
-                />
+                <img :src="feature.imagen" alt="Imagen no se encontrada" class="tw-h-6 tw-w-6">
+<!--                <component-->
+<!--                  :is="feature.imagen"-->
+<!--                  class="tw-h-6 tw-w-6 tw-text-black"-->
+<!--                  aria-hidden="true"-->
+<!--                />-->
               </div>
-              {{ feature.name }}
+              {{ feature.nombre }}
             </dt>
             <dd class="tw-mt-2 tw-text-base tw-leading-7 tw-text-gray-600 item2">
-              {{ feature.description }}
+              {{ feature.resumen }}
             </dd>
           </div>
         </dl>
@@ -53,47 +54,49 @@ import {
   UsersIcon,
 } from "@heroicons/vue/24/outline";
 import ScrollReveal from 'scrollreveal';
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import 'src/utils/scrollReveal'
+import {api} from "boot/axios";
 
-const features = [
-  {
-    name: "Servicios de Talleres",
-    description:
-      "Ser líder, de referencia y competitiva que produce y presta servicios técnicos y especializado al sector agropecuario del país con solvencia económica.",
-    icon: WrenchScrewdriverIcon,
-  },
-  {
-    name: "Servicios de Transportación de Cargas",
-    description:
-      "Especializados en transporte de cargas pesadas,a granel, frágil, perecedra y carga general.Contamos con un parque técnico optimo y personal calificado.Ofertamos seguridad, dinamismo en las entregas y precios preferenciales.",
-    icon: TruckIcon,
-  },
-  {
-    name: "Servicios de Obras Ingenieras",
-    description:
-      "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
-    icon: BuildingOffice2Icon,
-  },
-  {
-    name: "Servicios TIC",
-    description:
-      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
-    icon: WifiIcon,
-  },
-  {
-    name: "Servicios de Ingeniería y Proyectos",
-    description:
-      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
-    icon: CogIcon,
-  },
-  {
-    name: "Servicios de Aseguramiento y Logística",
-    description:
-      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
-    icon: UsersIcon,
-  },
-];
+const servicios = ref([])
+// const features = [
+//   {
+//     name: "Servicios de Talleres",
+//     description:
+//       "Ser líder, de referencia y competitiva que produce y presta servicios técnicos y especializado al sector agropecuario del país con solvencia económica.",
+//     icon: WrenchScrewdriverIcon,
+//   },
+//   {
+//     name: "Servicios de Transportación de Cargas",
+//     description:
+//       "Especializados en transporte de cargas pesadas,a granel, frágil, perecedra y carga general.Contamos con un parque técnico optimo y personal calificado.Ofertamos seguridad, dinamismo en las entregas y precios preferenciales.",
+//     icon: TruckIcon,
+//   },
+//   {
+//     name: "Servicios de Obras Ingenieras",
+//     description:
+//       "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
+//     icon: BuildingOffice2Icon,
+//   },
+//   {
+//     name: "Servicios TIC",
+//     description:
+//       "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
+//     icon: WifiIcon,
+//   },
+//   {
+//     name: "Servicios de Ingeniería y Proyectos",
+//     description:
+//       "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
+//     icon: CogIcon,
+//   },
+//   {
+//     name: "Servicios de Aseguramiento y Logística",
+//     description:
+//       "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
+//     icon: UsersIcon,
+//   },
+// ];
 
 onMounted(() => {
   const sr = ScrollReveal({
@@ -114,7 +117,16 @@ onMounted(() => {
     interval: 300
   })
 
+  getServicios()
 })
+
+const getServicios = () => {
+  api.get('/empresa/servicio/')
+    .then(response => {
+      servicios.value = response.data
+    })
+    .catch(error => console.log(error))
+}
 </script>
 
 <style scoped>

@@ -2,10 +2,10 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Agregar Socio
+        Agregar Servicio
       </q-card-section>
       <q-card-section>
-        <q-form @submit="storeSocios">
+        <q-form @submit="storeServicio">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
               <q-input
@@ -20,18 +20,19 @@
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.web"
-                label="Dirección URL"
+                v-model="form.resumen"
+                label="Resumen"
                 type="text"
+                 :rules="[rules.required]"
               />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-file name="logo" outlined v-model="form.logo" label="Logo" />
+              <q-file name="logo" outlined v-model="form.imagen" label="Imagen" />
             </div>
           </div>
 
           <q-btn
-            @click="$router.push({path:'/comentarios-estados'})"
+            @click="$router.push({path:'/servicios'})"
             type="button"
             color="negative"
             class="text-white q-mr-sm">
@@ -63,17 +64,17 @@ const router = useRouter()
 
 const form = ref({
   nombre: '',
-  logo: null,
-  web: ''
+  imagen: null,
+  resumen: ''
 })
 
-const storeSocios = () => {
+const storeServicio = () => {
   const formData = new FormData()
 
   Object.keys(form.value).forEach(key => {
     const value = form.value[key];
     if (value !== null && value !== undefined) {
-      if (key === 'logo') {
+      if (key === 'imagen') {
         formData.append(key, value);
       } else {
         formData.append(key, value);
@@ -81,16 +82,16 @@ const storeSocios = () => {
     }
   });
 
-  api.post('/empresa/socio/', formData)
+  api.post('/empresa/servicio/', formData)
     .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Socio creado correctamente.',
+        message: 'Servicio creado correctamente.',
         position: 'top-right',
         progress: true,
       })
 
-      router.push({path: '/socios'})
+      router.push({path: '/servicios'})
     })
     .catch(error => {
       if (error.response.data) {

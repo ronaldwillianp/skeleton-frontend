@@ -23,31 +23,22 @@
           <img class="tw-object-cover tw-object-center tw-rounded" alt="hero" src="img/heroSection.svg">
         </div>
       </div>
-      <div
-        class="tw-bg-white tw-absolute tw-bottom-6 tw-w-full tw-py-4 tw-px-7 md:tw-px-20 tw-flex tw-items-center tw-justify-between">
-        <img
-          v-for="slide in images" :key="slide.id"
-          class="tw-object-cover"
-          :src="slide.src"
-          alt="Image not found"
-          width="108"
-          height="48"
-        />
-      </div>
+      <ListSocios />
     </div>
   </section>
 </template>
 
 <script setup>
 import {ref} from "vue";
+import ListSocios from "components/Socios/ListSocios.vue";
 
-const images = ref([
-  {id: 1, src: '/img/clients/client-1.png'},
-  {id: 2, src: '/img/clients/client-2.png'},
-  {id: 3, src: '/img/clients/client-3.png'},
-  {id: 4, src: '/img/clients/client-4.png'},
-  {id: 5, src: '/img/clients/client-5.png'},
-])
+// const images = ref([
+//   {id: 1, src: '/img/clients/client-1.png'},
+//   {id: 2, src: '/img/clients/client-2.png'},
+//   {id: 3, src: '/img/clients/client-3.png'},
+//   {id: 4, src: '/img/clients/client-4.png'},
+//   {id: 5, src: '/img/clients/client-5.png'},
+// ])
 </script>
 
 <style scoped>

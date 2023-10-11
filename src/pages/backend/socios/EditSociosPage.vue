@@ -2,10 +2,10 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Editar Comentario de Estado
+        Editar Socio
       </q-card-section>
       <q-card-section>
-        <q-form @submit="updateComentarioEstado">
+        <q-form @submit="updateSocio">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
               <q-input
@@ -20,10 +20,13 @@
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.descripcion"
-                label="Descripción"
+                v-model="form.web"
+                label="Dirección URL"
                 type="text"
               />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-file name="logo" outlined v-model="form.logo" label="Logo"  />
             </div>
           </div>
 
@@ -53,38 +56,55 @@ import {onMounted, ref} from 'vue'
 import {useQuasar} from "quasar";
 import {api} from "boot/axios";
 import {useRouter} from "vue-router";
-import rules from '../../../../utils/rules'
+import rules from '../../../utils/rules'
 
 const $q = useQuasar()
 const router = useRouter()
-const comentario_estado_id = router.currentRoute.value.params.id
+const socio_id = router.currentRoute.value.params.id
 
 const form = ref({
   nombre: '',
-  descripcion: '',
+  logo: null,
+  web: ''
 })
+
+const img = ref(null)
 
 onMounted(() => {
-  getComentariosEstados()
+  getSocio()
 })
 
-const getComentariosEstados = () => {
-  api.get(`/social/estado_comentario/` + comentario_estado_id + "/").then(response => {
+const getSocio = () => {
+  api.get(`/empresa/socio/` + socio_id + "/").then(response => {
     form.value = response.data
+    form.value.logo = null
   })
 }
 
-const updateComentarioEstado = () => {
-  api.put('/social/estado_comentario/' + comentario_estado_id + '/', form.value)
+const updateSocio = () => {
+  const formData = new FormData()
+
+  Object.keys(form.value).forEach(key => {
+    const value = form.value[key];
+    if (value !== null && value !== undefined) {
+      if (key === 'logo') {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    }
+  });
+
+  api.put('/empresa/socio/' + socio_id + '/', formData)
     .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Comentario de Estado editado correctamente.',
+        message: 'Socio editado correctamente.',
         position: 'top-right',
         progress: true,
       })
 
-      router.push({path: '/comentarios-estados'})
+      router.push({path: '/socios'})
     })
     .catch(error => {
       if (error.response.data) {
@@ -105,6 +125,26 @@ const updateComentarioEstado = () => {
         })
       }
     })
+}
+
+const createImage = (file) => {
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    img.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+const onFileChange = (file) => {
+  if (!file) {
+    return;
+  }
+  if (typeof file == "object") {
+    createImage(file);
+  } else {
+    img.value = file;
+  }
 }
 </script>
 

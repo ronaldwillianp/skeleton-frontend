@@ -265,6 +265,13 @@ const menuList = [
     groups: ['Administrador'],
      path: '/socios',
   },
+  {
+    icon: 'handshake',
+    label: 'Servicios',
+    separator: false,
+    groups: ['Administrador'],
+     path: '/servicios',
+  },
 ]
 
 const menuList2 = [

@@ -239,6 +239,26 @@ const routes = [
         meta: {groups: ['Administrador']},
         component: () => import('pages/backend/socios/EditSociosPage.vue')
       },
+
+      // Gestion Servicios
+       {
+        path: '/servicios',
+        name: "Servicos",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/servicios/ServiciosPage.vue')
+      },
+      {
+        path: '/add-servicio',
+        name: "add-servicos",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/servicios/AddServiciosPage.vue')
+      },
+      {
+        path: '/edit-servicio/:id',
+        name: "edit-servicos",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/servicios/EditServiciosPage.vue')
+      },
     ]
   },
   {
