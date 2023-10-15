@@ -5,7 +5,12 @@ const routes = [
     path: '/',
     component: () => import('layouts/LandingPageLayout.vue'),
     children: [
-      {path: '', component: () => import('pages/frontend/IndexPage.vue')}
+      {path: '', component: () => import('pages/frontend/IndexPage.vue')},
+      {
+        path: '/noticia/:nombre',
+        name: "noticia",
+        component: () => import('pages/backend/noticias/NoticiaItem.vue')
+      },
     ]
   },
   {
@@ -160,8 +165,8 @@ const routes = [
         component: () => import('pages/backend/enlaces-interes/EditEnlacesInteresPage.vue')
       },
 
-       // Enlaces Categorias
-       {
+      // Enlaces Categorias
+      {
         path: '/enlaces-categorias',
         name: "enlaces-categorias",
         meta: {groups: ['Administrador']},
@@ -200,7 +205,7 @@ const routes = [
         component: () => import('pages/backend/comentarios/estados/EditComentariosEstadosPage.vue')
       },
 
-       //  Comentarios Noticias
+      //  Comentarios Noticias
       {
         path: '/comentarios-noticias',
         name: "comentarios-noticias",
@@ -220,8 +225,8 @@ const routes = [
         component: () => import('pages/backend/comentarios/noticias/EditComentariosNoticiaPage.vue')
       },
 
-       // Gestion Socio
-       {
+      // Gestion Socio
+      {
         path: '/socios',
         name: "Socios",
         meta: {groups: ['Administrador']},
@@ -241,7 +246,7 @@ const routes = [
       },
 
       // Gestion Servicios
-       {
+      {
         path: '/servicios',
         name: "Servicos",
         meta: {groups: ['Administrador']},

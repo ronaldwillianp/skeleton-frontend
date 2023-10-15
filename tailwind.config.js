@@ -13,7 +13,13 @@ export default {
       primaryClaro: '#D7F5DC',
       black: '#130F26',
       white: '#FFF',
-      blue: '#3b82f6'
+      blue: '#3b82f6',
+      gray: '#4b5563',
+      gray50: '#f9fafb',
+      gray100: '#f3f4f6',
+      gray200: '#e5e7eb',
+      gray500: '#6b7280',
+      gray900: '#111827',
     },
     extend: {
       animation: {
