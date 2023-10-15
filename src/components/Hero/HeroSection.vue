@@ -13,10 +13,10 @@
             cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic
             tumeric truffaut hexagon try-hard chambray.</p>
           <div class="tw-flex tw-justify-center">
-<!--            <button-->
-<!--              class="tw-inline-flex tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-6 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-lg">-->
-<!--              Button-->
-<!--            </button>-->
+            <button
+              class="tw-inline-flex tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-6 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-lg">
+              Saber Más
+            </button>
           </div>
         </div>
         <div class="lg:tw-max-w-lg lg:tw-w-full md:tw-w-1/2 tw-w-5/6">
@@ -41,27 +41,3 @@ import ListSocios from "components/Socios/ListSocios.vue";
 // ])
 </script>
 
-<style scoped>
-@keyframes slide {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.image-slider {
-  overflow: hidden;
-}
-
-.image-slider img {
-  animation: slide 10s linear infinite;
-  animation-direction: alternate;
-}
-
-.image-slider img:last-child {
-  animation-delay: -10s;
-}
-
-</style>

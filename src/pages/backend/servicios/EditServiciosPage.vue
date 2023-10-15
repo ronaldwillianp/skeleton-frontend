@@ -128,24 +128,5 @@ const updateServicio = () => {
     })
 }
 
-const createImage = (file) => {
-  const reader = new FileReader();
-
-  reader.onload = (e) => {
-    img.value = e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
-
-const onFileChange = (file) => {
-  if (!file) {
-    return;
-  }
-  if (typeof file == "object") {
-    createImage(file);
-  } else {
-    img.value = file;
-  }
-}
 </script>
 

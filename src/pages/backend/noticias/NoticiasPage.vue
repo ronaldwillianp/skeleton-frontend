@@ -12,14 +12,27 @@
       :no-data-label="textInfo.noDatalabel"
       :loading="isLoading"
     >
+      <template v-slot:body-cell-portada="props">
+        <q-td :props="props">
+          <q-avatar square>
+            <q-img :src="props.row.portada" style="height: 50px; max-width: 195px"/>
+          </q-avatar>
+        </q-td>
+      </template>
+
       <template v-slot:body-cell-titulo="props">
         <td>
           <div class="tw-w-56 ellipsis">{{ props.row.titulo }}</div>
         </td>
       </template>
+      <template v-slot:body-cell-subtitulo="props">
+        <td>
+          <div class="tw-w-52 ellipsis">{{ props.row.subtitulo }}</div>
+        </td>
+      </template>
       <template v-slot:body-cell-descripcion="props">
         <td>
-          <div class="tw-w-60 ellipsis">{{ props.row.descripcion }}</div>
+          <div class="tw-w-52 ellipsis">{{ props.row.descripcion }}</div>
         </td>
       </template>
 
@@ -129,7 +142,9 @@ const {
 } = useTable()
 
 const columns = [
+  {name: 'portada', align: 'left', label: 'Portada', field: 'portada', sortable: true},
   {name: 'titulo', align: 'left', label: 'Títtulo', field: 'titulo', sortable: true},
+  {name: 'subtitulo', align: 'left', label: 'Subtítulo', field: 'subtitulo', sortable: true},
   {name: 'descripcion', align: 'left', label: 'Descripción', field: 'descripcion', sortable: true},
   {name: 'fecha_creacion', align: 'left', label: 'Fecha Creación', field: 'fecha_creacion', sortable: true},
   {name: 'fecha_modificacion', align: 'left', label: 'Fecha Modificación', field: 'fecha_modificacion', sortable: true},

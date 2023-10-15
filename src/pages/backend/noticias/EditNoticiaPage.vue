@@ -8,10 +8,23 @@
         <q-form @submit="updateNoticia">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
+              <q-file name="logo" outlined v-model="form.portada" label="Portada"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
                 v-model="form.titulo"
                 label="Título"
+                type="text"
+                lazy-rules
+                :rules="[rules.required]"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input
+                outlined
+                v-model="form.subtitulo"
+                label="Subtítulo"
                 type="text"
                 lazy-rules
                 :rules="[rules.required]"
@@ -30,8 +43,7 @@
               <q-select outlined v-model="selectCategoria" transition-show="jump-up"
                         transition-hide="jump-up" label="Seleccione una categoría" option-value="id"
                         option-label="nombre"
-                        :options="categorias" emit-value map-options
-                        multiple
+                        :options="categorias" emit-value map-options multiple
                         :rules="[rules.requiredSelect]"
               >
                 <template v-slot:no-option>
@@ -98,6 +110,7 @@ const $q = useQuasar()
 
 const form = ref({
   titulo: '',
+  subtitulo: '',
   descripcion: '',
   creada_por_info: '',
   estado_info: '',
@@ -116,14 +129,23 @@ onMounted(() => {
 })
 
 const updateNoticia = () => {
-  const formNoticias = {
-    titulo: form.value.titulo,
-    descripcion: form.value.descripcion,
-    creada_por: user.user.id,
-    estado: selectEstado.value,
-    categoria: selectCategoria.value
-  }
-  api.put('/social/noticia/' + noticia_id + '/', formNoticias)
+  form.value.estado = selectEstado.value
+  form.value.categoria = selectCategoria.value
+  form.value.creada_por = user.user.id
+
+  const formData = new FormData()
+
+  Object.keys(form.value).forEach(key => {
+    const value = form.value[key];
+    if (value !== null && value !== undefined) {
+      if (key === 'portada') {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    }
+  });
+  api.put('/social/noticia/' + noticia_id + '/', formData)
     .then(response => {
       $q.notify({
         type: 'positive',
@@ -149,6 +171,7 @@ const getNoticias = () => {
     form.value = response.data
     selectEstado.value = form.value.estado
     selectCategoria.value = form.value.categoria
+    form.value.portada = null
   }).catch(error => Promise.reject(error))
 }
 

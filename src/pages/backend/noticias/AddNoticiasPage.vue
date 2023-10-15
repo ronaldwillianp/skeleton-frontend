@@ -8,6 +8,9 @@
         <q-form @submit="storeNoticia">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
+              <q-file name="logo" outlined v-model="form.portada" label="Portada" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
                 v-model="form.titulo"
@@ -15,6 +18,15 @@
                 type="text"
                 lazy-rules
                 :rules="[rules.required]"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input
+                outlined
+                v-model="form.subtitulo"
+                label="Subtítulo"
+                type="text"
+                lazy-rules
               />
             </div>
             <div class="col-xs-12 col-sm-6">
@@ -97,11 +109,10 @@ const selectEstado = ref(null)
 const router = useRouter()
 
 const form = ref({
+  portada: null,
   titulo: '',
+  subtitulo: '',
   descripcion: '',
-  creada_por_info: '',
-  estado_info: '',
-  categoria_info: []
 })
 
 onMounted(() => {
@@ -110,15 +121,24 @@ onMounted(() => {
 })
 
 const storeNoticia = () => {
-  const formNoticias = {
-    titulo: form.value.titulo,
-    descripcion: form.value.descripcion,
-    creada_por: user.user.id,
-    estado: selectEstado.value,
-    categoria: selectCategoria.value
-  }
+  form.value.estado = selectEstado.value
+  form.value.categoria = selectCategoria.value
+  form.value.creada_por = user.user.id
 
-  api.post('/social/noticia/', formNoticias)
+  const formData = new FormData()
+
+  Object.keys(form.value).forEach(key => {
+    const value = form.value[key];
+    if (value !== null && value !== undefined) {
+      if (key === 'portada') {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    }
+  });
+
+  api.post('/social/noticia/', formData)
     .then(response => {
       $q.notify({
         type: 'positive',
@@ -130,24 +150,23 @@ const storeNoticia = () => {
       router.push({path: '/noticias'})
     })
     .catch(error => {
-      // if (error.response.data) {
-      //   for (let i in error.response.data) {
-      //     $q.notify({
-      //       type: 'negative',
-      //       message: error.response.data[i],
-      //       position: 'top-right',
-      //       progress: true,
-      //     })
-      //   }
-      // } else {
-      //   $q.notify({
-      //     type: 'negative',
-      //     message: error.response,
-      //     position: 'top-right',
-      //     progress: true,
-      //   })
-      // }
-      console.log(error)
+      if (error.response.data) {
+        for (let i in error.response.data) {
+          $q.notify({
+            type: 'negative',
+            message: error.response.data[i],
+            position: 'top-right',
+            progress: true,
+          })
+        }
+      } else {
+        $q.notify({
+          type: 'negative',
+          message: error.response,
+          position: 'top-right',
+          progress: true,
+        })
+      }
     })
 }
 
@@ -159,7 +178,6 @@ const getCategorias = () => {
 const getEstadoNoticias = () => {
   api.get('/social/estado_noticia/').then(response => {
     estados.value = response.data
-    console.log(response.data)
   })
 }
 

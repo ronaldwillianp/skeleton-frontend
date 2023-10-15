@@ -3,7 +3,7 @@
     <div class="tw-mx-auto tw-max-w-7xl tw-px-7 lg:px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
         <p
-          class="titleServices tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
+          class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
         >
           Nuetro grupo empresarial ofrece diversos servicios
         </p>
@@ -19,18 +19,18 @@
           <div
             v-for="feature in servicios"
             :key="feature.id"
-            class="list tw-relative tw-pl-16 listWithInterval"
+            class="lists tw-relative tw-pl-16"
           >
             <dt class="tw-text-base tw-font-semibold tw-leading-7 tw-text-gray-900 item">
               <div
                 class="tw-absolute tw-left-0 tw-top-0 tw-flex tw-h-11 tw-w-11 tw-items-center tw-justify-center tw-rounded-lg tw-bg-primaryClaro"
               >
                 <img :src="feature.imagen" alt="Imagen no se encontrada" class="tw-h-6 tw-w-6">
-<!--                <component-->
-<!--                  :is="feature.imagen"-->
-<!--                  class="tw-h-6 tw-w-6 tw-text-black"-->
-<!--                  aria-hidden="true"-->
-<!--                />-->
+                <!--                <component-->
+                <!--                  :is="feature.imagen"-->
+                <!--                  class="tw-h-6 tw-w-6 tw-text-black"-->
+                <!--                  aria-hidden="true"-->
+                <!--                />-->
               </div>
               {{ feature.nombre }}
             </dt>
@@ -57,6 +57,7 @@ import ScrollReveal from 'scrollreveal';
 import {onMounted, ref} from "vue";
 import 'src/utils/scrollReveal'
 import {api} from "boot/axios";
+import anime from 'animejs';
 
 const servicios = ref([])
 // const features = [
@@ -98,12 +99,14 @@ const servicios = ref([])
 //   },
 // ];
 
+
 onMounted(() => {
+
   const sr = ScrollReveal({
     reset: true,
     duration: 2000
   })
-   sr.reveal('.titleServices', {
+  sr.reveal('.titleServices', {
     origin: 'top',
     distance: '55px',
   })
@@ -111,8 +114,8 @@ onMounted(() => {
     origin: 'top',
     distance: '65px',
   })
-  sr.reveal('.list', {
-   origin: 'left',
+  sr.reveal('.lists', {
+    origin: 'left',
     distance: '50px',
     interval: 300
   })

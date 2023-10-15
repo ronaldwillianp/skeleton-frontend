@@ -1,15 +1,5 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <!-- <q-toolbar class="q-px-xl">
-      <q-toolbar-title>
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
-        </q-avatar>
-        Gelma
-      </q-toolbar-title>
-
-      <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
-    </q-toolbar> -->
     <header class="tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-heroBg tw-z-50">
       <nav
         class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-px-7 md:tw-px-16 tw-container tw-mx-auto"
@@ -47,7 +37,7 @@
         <div class="tw-hidden lg:tw-flex lg:tw-flex-1 lg:tw-justify-end">
           <router-link
             to="/login"
-            class="tw-text-sm tw-font-medium tw-rounded focus:tw-outline-none tw-leading-6 tw-text-white tw-px-4 tw-py-2 tw-bg-primary hover:tw-bg-hoverPrimary tw-transition-all"
+            class="tw-text-sm tw-font-medium tw-tracking-wide tw-rounded focus:tw-outline-none tw-leading-6 tw-text-white tw-px-4 tw-py-2 tw-bg-primary hover:tw-bg-hoverPrimary tw-transition-all"
           >Autenticarse
           </router-link
           >
