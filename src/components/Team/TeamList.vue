@@ -82,7 +82,7 @@ const people = [
 
 onMounted(() => {
   const sr = ScrollReveal({
-    reset: true,
+    reset: false,
     duration: 2000
   })
 

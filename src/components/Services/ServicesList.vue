@@ -55,9 +55,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import ScrollReveal from 'scrollreveal';
 import {onMounted, ref} from "vue";
-import 'src/utils/scrollReveal'
 import {api} from "boot/axios";
-import anime from 'animejs';
 
 const servicios = ref([])
 // const features = [
@@ -103,7 +101,7 @@ const servicios = ref([])
 onMounted(() => {
 
   const sr = ScrollReveal({
-    reset: true,
+    reset: false,
     duration: 2000
   })
   sr.reveal('.titleServices', {

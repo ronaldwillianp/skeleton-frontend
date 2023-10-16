@@ -19,6 +19,7 @@ export default {
       gray100: '#f3f4f6',
       gray200: '#e5e7eb',
       gray500: '#6b7280',
+      gray600: '#4b5563',
       gray900: '#111827',
     },
     extend: {

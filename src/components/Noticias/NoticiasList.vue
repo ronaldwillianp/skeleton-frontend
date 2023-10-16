@@ -38,7 +38,7 @@
             <h3
               class="tw-mt-3 tw-text-lg tw-font-semibold tw-leading-6 tw-text-gray900 group-hover:tw-text-gray600"
             >
-              <router-link :to="({path:'/noticia/' + post.titulo.replace(/ /g, '-')})">
+              <router-link :to="({path:'/noticia/' + post.titulo.replace(/ /g, '-') + '/' + post.id})">
                 <span class="tw-absolute tw-inset-0"/>
                 {{ post.titulo }}
               </router-link>
@@ -83,7 +83,6 @@ import ScrollReveal from "scrollreveal";
 import {api} from "boot/axios";
 import dayjs from "dayjs";
 import locale from 'src/utils/esDate'
-import 'src/utils/scrollReveal'
 import {useRouter} from "vue-router";
 
 const noticias = ref([])
@@ -93,23 +92,23 @@ const router = useRouter()
 onMounted(() => {
   getNoticias()
 
-  // const sr = ScrollReveal({
-  //   reset: false,
-  //   duration: 2000
-  // })
-  // sr.reveal('.titleNoticias', {
-  //   origin: 'top',
-  //   distance: '55px',
-  // })
-  // sr.reveal('.listNoticias', {
-  //   origin: 'left',
-  //   distance: '50px',
-  // })
-  // sr.reveal('.button', {
-  //   origin: 'top',
-  //   distance: '50px',
-  //   delay: 300
-  // })
+  const sr = ScrollReveal({
+    reset: false,
+    duration: 2000
+  })
+  sr.reveal('.titleNoticias', {
+    origin: 'top',
+    distance: '55px',
+  })
+  sr.reveal('.listNoticias', {
+    origin: 'left',
+    distance: '50px',
+  })
+  sr.reveal('.button', {
+    origin: 'top',
+    distance: '50px',
+    delay: 300
+  })
 })
 
 const getNoticias = () => {

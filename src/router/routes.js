@@ -7,7 +7,7 @@ const routes = [
     children: [
       {path: '', component: () => import('pages/frontend/IndexPage.vue')},
       {
-        path: '/noticia/:nombre',
+        path: '/noticia/:nombre/:id',
         name: "noticia",
         component: () => import('pages/backend/noticias/NoticiaItem.vue')
       },

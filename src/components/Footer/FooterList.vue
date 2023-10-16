@@ -71,7 +71,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {api} from "boot/axios";
-import 'src/utils/scrollReveal'
 
 const links = ref([])
 
