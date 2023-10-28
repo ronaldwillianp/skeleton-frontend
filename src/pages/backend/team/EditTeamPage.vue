@@ -2,16 +2,16 @@
   <div class="q-pa-md">
     <q-card>
       <q-card-section class="text-h6">
-        Agregar Enlace de Interés
+        Editar Directivo
       </q-card-section>
       <q-card-section>
-        <q-form @submit="storeEnlacesInteres">
+        <q-form @submit="updateDirectivo">
           <div class="row q-col-gutter-md q-mb-md">
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.nombre"
-                label="Nombre"
+                v-model="form.nombre_completo"
+                label="Nombre Completo"
                 type="text"
                 lazy-rules
                 :rules="[rules.required]"
@@ -20,31 +20,36 @@
             <div class="col-xs-12 col-sm-6">
               <q-input
                 outlined
-                v-model="form.enlace"
-                label="Dirección URL"
-                type="text"
+                v-model="form.prioridad"
+                label="Prioridad"
+                type="number"
+                :rules="[rules.numberGreaterZero]"
               />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-select outlined v-model="selectCategoria" transition-show="jump-up"
-                        transition-hide="jump-up" label="Seleccione una categoría" option-value="id"
-                        option-label="nombre"
-                        :options="categorias"
-                        :rules="[rules.requiredSelect]"
-              >
-                <template v-slot:no-option>
-                  <q-item>
-                    <q-item-section class="text-grey">
-                      No existen elementos
-                    </q-item-section>
-                  </q-item>
-                </template>
-              </q-select>
+              <q-file name="logo" outlined v-model="form.imagen" label="Imagen"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <q-input
+                outlined
+                v-model="form.cargo"
+                label="Cargo"
+                type="text"
+                :rules="[rules.required]"
+              />
+            </div>
+            <div class="col-xs-12">
+              <q-input
+                outlined
+                v-model="form.biografia"
+                label="Biografía"
+                type="text"
+              />
             </div>
           </div>
 
           <q-btn
-            @click="$router.push({path:'/enlaces-interes'})"
+            @click="$router.push({path:'/directivos'})"
             type="button"
             color="negative"
             class="text-white q-mr-sm">
@@ -73,40 +78,53 @@ import rules from '../../../utils/rules'
 
 const $q = useQuasar()
 const router = useRouter()
-const categorias = ref([])
-const selectCategoria = ref(null)
+const directivo_id = router.currentRoute.value.params.id
 
 const form = ref({
-  nombre: '',
-  enlace: '',
-  categoria: []
+  nombre_completo: '',
+  prioridad: '',
+  imagen: null,
+  cargo: '',
+  biografia: ''
 })
+
+const img = ref(null)
 
 onMounted(() => {
-  getCategorias()
+  getDirectivo()
 })
 
-const getCategorias = () => {
-  api.get('/social/categoria_enlace_interes/').then(response => {
-    categorias.value = response.data
+const getDirectivo = () => {
+  api.get(`/empresa/directivo/` + directivo_id + "/").then(response => {
+    form.value = response.data
+    form.value.imagen = null
   })
-    .catch(error => console.log(error))
 }
 
-const storeEnlacesInteres = () => {
+const updateDirectivo = () => {
+  const formData = new FormData()
 
-  form.value.categoria = selectCategoria.value.id
+  Object.keys(form.value).forEach(key => {
+    const value = form.value[key];
+    if (value !== null && value !== undefined) {
+      if (key === 'imagen') {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    }
+  });
 
-  api.post('/social/enlace_interes/', form.value)
+  api.put('/empresa/directivo/' + directivo_id + '/', formData)
     .then(response => {
       $q.notify({
         type: 'positive',
-        message: 'Enlace creado correctamente.',
+        message: 'Directivo editado correctamente.',
         position: 'top-right',
         progress: true,
       })
 
-      router.push({path: '/enlaces-interes'})
+      router.push({path: '/directivos'})
     })
     .catch(error => {
       if (error.response.data) {
@@ -128,5 +146,6 @@ const storeEnlacesInteres = () => {
       }
     })
 }
+
 </script>
 

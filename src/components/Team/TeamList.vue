@@ -38,7 +38,6 @@
 
 <script setup>
 import {onMounted} from "vue";
-import ScrollReveal from "scrollreveal";
 
 const people = [
   {
@@ -80,26 +79,4 @@ const people = [
   // More people...
 ];
 
-onMounted(() => {
-  const sr = ScrollReveal({
-    reset: false,
-    duration: 2000
-  })
-
-  sr.reveal('.titleServices', {
-    origin: 'left',
-    distance: '55px',
-  })
-
-  sr.reveal('.subtitle', {
-    origin: 'left',
-    distance: '60px',
-  })
-
-  sr.reveal('.teams', {
-    origin: 'right',
-    distance: '-50px',
-    interval: 200,
-  })
-})
 </script>

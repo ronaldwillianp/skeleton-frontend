@@ -21,6 +21,7 @@ export default {
       gray500: '#6b7280',
       gray600: '#4b5563',
       gray900: '#111827',
+      slate200: '#e2e8f0'
     },
     extend: {
       animation: {

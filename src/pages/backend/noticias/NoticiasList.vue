@@ -1,22 +1,14 @@
 <template>
-  <div v-show="noticias.length > 0" class="tw-py-24 sm:tw-py-20">
-    <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8">
-      <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">
-        <p
-          v-animate-onscroll.repeat="'animated fadeInDown slower'"
-          class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-black sm:tw-text-4xl"
-        >
-          Nuestro aconetecer informátivo
-        </p>
-      </div>
+  <SkeletonNoticiaList v-if="isLoading"/>
+  <div v-else class="tw-pt-12">
+    <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-16">
       <div
         class="tw-mx-auto md:tw-mt-10 tw-grid tw-max-w-2xl tw-grid-cols-1 tw-gap-x-8 tw-gap-y-16 tw-border-gray200 tw-pt-7 md:tw-pt-10 sm:tw-mt-10 sm:tw-pt-8 lg:tw-mx-0 lg:tw-max-w-none lg:tw-grid-cols-3"
       >
         <article
-          v-for="(post, index) in noticias"
+          v-for="post in noticias"
           :key="post.id"
           class="tw-flex tw-flex-col tw-items-start tw-justify-between"
-          v-animate-onscroll.repeat="'animated fadeInLeft slower'"
         >
           <q-img
             :src="post.portada"
@@ -65,51 +57,37 @@
               <!--              <p class="tw-text-gray-600">{{ post.author.role }}</p>-->
             </div>
           </div>
-
         </article>
-      </div>
-      <div
-        v-animate-onscroll.repeat="'animated fadeInDown slower'"
-        class="tw-flex tw-w-full tw-justify-center button tw-mt-12">
-        <router-link :to="{path: '/listado-noticias'}"
-                     class="tw-flex tw-items-center tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-4 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-sm">
-          Ver todas
-          <q-icon name="trending_flat" class="tw-ml-2" size="20px"></q-icon>
-        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref} from 'vue'
 import {api} from "boot/axios";
 import dayjs from "dayjs";
-import locale from 'src/utils/esDate'
-import {useRouter} from "vue-router";
+import locale from "src/utils/esDate";
+import SkeletonNoticiaList from "components/Skeleton/SkeletonNoticiaList.vue";
 
 const noticias = ref([])
-
-const router = useRouter()
+const isLoading = ref(false)
 
 onMounted(() => {
   getNoticias()
 })
 
 const getNoticias = () => {
+  isLoading.value = true
   api.get('/social/noticia/')
     .then(response => {
-      noticias.value = response.data.sort((a, b) => new Date(b.fecha_creacion) - new Date(a.fecha_creacion)).slice(0, 3)
+      isLoading.value = false
+      noticias.value = response.data
     })
     .catch(error => console.log(error))
 }
 
 function formatDate(date) {
-  return dayjs(date).locale(locale).format('MMMM D, YYYY')
+  return dayjs(date).locale(locale).format('D de MMMM , YYYY')
 }
-
 </script>
-
-<style scoped>
-
-</style>

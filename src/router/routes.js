@@ -11,6 +11,11 @@ const routes = [
         name: "noticia",
         component: () => import('pages/backend/noticias/NoticiaItem.vue')
       },
+      {
+        path: '/listado-noticias',
+        name: "Listado de Noticias",
+        component: () => import('pages/backend/noticias/NoticiasList.vue')
+      },
     ]
   },
   {
@@ -263,6 +268,26 @@ const routes = [
         name: "edit-servicos",
         meta: {groups: ['Administrador']},
         component: () => import('pages/backend/servicios/EditServiciosPage.vue')
+      },
+
+      // Gestion Directivo
+      {
+        path: '/directivos',
+        name: "Directivos",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/team/TeamPage.vue')
+      },
+      {
+        path: '/add-directivo',
+        name: "Add Directivo",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/team/AddTeamPage.vue')
+      },
+      {
+        path: '/edit-directivo/:id',
+        name: "Edit Directivo",
+        meta: {groups: ['Administrador']},
+        component: () => import('pages/backend/team/EditTeamPage.vue')
       },
     ]
   },

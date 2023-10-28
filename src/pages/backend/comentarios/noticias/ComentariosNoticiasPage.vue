@@ -29,7 +29,7 @@
       </template>
       <template v-slot:body-cell-creada_por_info="props">
         <td>
-          <div>{{ props.row.creada_por_info.username }}</div>
+          <div>{{ props.row.creada_por_info?.username }}</div>
         </td>
       </template>
       <template v-slot:body-cell-fecha_creacion="props">
@@ -121,9 +121,10 @@ const {
 
 const columns = [
   {name: 'comentario', align: 'left', label: 'Comentario', field: 'comentario', sortable: true},
+  {name: 'nombre_comentario', align: 'left', label: 'Nombre', field: 'nombre_comentario', sortable: true},
+  {name: 'correo_comentario', align: 'left', label: 'Correo', field: 'correo_comentario', sortable: true},
   {name: 'noticia_info', align: 'left', label: 'Noticia', field: 'noticia_info', sortable: true},
   {name: 'estado_info', align: 'left', label: 'Estado', field: 'estado_info', sortable: true},
-  // {name: 'categoria_info', align: 'left', label: 'Categoria', field: 'categoria_info', sortable: true},
   {name: 'creada_por_info', align: 'left', label: 'Creado', field: 'creada_por_info', sortable: true},
   {name: 'fecha_creacion', align: 'left', label: 'Fecha Creación', field: 'fecha_creacion', sortable: true},
   {name: 'fecha_modificacion', align: 'left', label: 'Fecha Modificación', field: 'fecha_modificacion', sortable: true},
@@ -151,8 +152,8 @@ const getComentariosNoticias = () => {
   isLoading.value = true
   api.get(`/social/comentario_noticia/`).then(response => {
     isLoading.value = false
-    console.log(response.data)
     comentariosNoticias.value = response.data
+    console.log(response.data)
   })
 }
 

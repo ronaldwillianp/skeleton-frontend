@@ -223,7 +223,6 @@ const menuList = [
     icon: 'newspaper',
     label: 'Social',
     separator: false,
-    path: '/noticias',
     groups: ['Administrador'],
     children: [
       {label: 'Noticias', path: '/noticias'},
@@ -266,11 +265,18 @@ const menuList = [
      path: '/socios',
   },
   {
-    icon: 'handshake',
+    icon: 'apps',
     label: 'Servicios',
     separator: false,
     groups: ['Administrador'],
      path: '/servicios',
+  },
+  {
+    icon: 'group',
+    label: 'Directivos',
+    separator: false,
+    groups: ['Administrador'],
+     path: '/directivos',
   },
 ]
 
