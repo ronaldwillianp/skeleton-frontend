@@ -24,7 +24,15 @@
                 label="Prioridad"
                 type="number"
                 :rules="[rules.numberGreaterZero]"
-              />
+              >
+                <template v-slot:append>
+                  <q-icon name="report">
+                    <q-tooltip class="tw-text-[15px]">
+                      Mientra sea menor el número mayor será la prioridad
+                    </q-tooltip>
+                  </q-icon>
+                </template>
+              </q-input>
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-file name="logo" outlined v-model="form.imagen" label="Imagen"/>

@@ -17,111 +17,118 @@
 
   <div v-else class="tw-py-24 sm:tw-py-32">
     <div class="tw-mx-auto tw-max-w-4xl tw-px-6 lg:tw-px-16">
-      <div class="tw-flex tw-items-center tw-gap-3">
-        <div
-          class="tw-flex tw-items-center tw-justify-center tw-h-14 tw-w-14 tw-bg-heroBg tw-rounded-full tw-text-lg tw-font-medium">
-          E
-        </div>
-        <hr class="tw-h-9 tw-ml-1.5 tw-bg-gray900 tw-w-0.5">
-        <div class="tw-flex tw-flex-col -tw-ml-0.5">
-          <div class=" tw-text-gray600 tw-text-[16px]">
-            {{ formatDate(noticia.fecha_creacion) }}
+      <transition-group
+        appear
+        enter-active-class="animated fadeIn slower"
+        leave-active-class="animeted fadeOut slower"
+      >
+        <div key="text" class="tw-flex tw-items-center tw-gap-3">
+          <div
+            class="tw-flex tw-items-center tw-justify-center tw-h-14 tw-w-14 tw-bg-heroBg tw-rounded-full tw-text-lg tw-font-medium">
+            E
           </div>
-          <div class="tw-font-medium tw-text-xl">
-            {{ noticia.creada_por_info?.username }}
+          <hr class="tw-h-9 tw-ml-1.5 tw-bg-gray900 tw-w-0.5">
+          <div class="tw-flex tw-flex-col -tw-ml-0.5">
+            <div class=" tw-text-gray600 tw-text-[16px]">
+              {{ formatDate(noticia.fecha_creacion) }}
+            </div>
+            <div class="tw-font-medium tw-text-xl">
+              {{ noticia.creada_por_info?.username }}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="tw-mt-9 tw-text-2xl tw-font-medium">
-        {{ noticia.titulo }}
-      </div>
-      <div class="tw-mt-8 tw-text-base tw-leading-relaxed">
-        {{ noticia.subtitulo }}
-      </div>
-      <div class="tw-mt-9">
-        <img :src="noticia.portada" class="tw-h-auto tw-max-w-full" alt="No imagen found"/>
-      </div>
-      <div class="tw-mt-8 tw-text-base tw-leading-relaxed">
-        {{ noticia.descripcion }}
-      </div>
-
-      <!-- Comentarios -->
-      <div class="tw-mt-28 tw-gap-6">
-        <div class="tw-text-xl tw-mb-4 tw-font-medium">
-          {{ comentarios.length }} Comentarios
+        <div key="text" class="tw-mt-9 tw-text-2xl tw-font-medium">
+          {{ noticia.titulo }}
+        </div>
+        <div key="text" class="tw-mt-8 tw-text-base tw-leading-relaxed">
+          {{ noticia.subtitulo }}
         </div>
 
-        <!-- Form -->
-        <q-card class="tw-mb-5" flat>
-          <q-card-section>
-            <q-form @submit="storeComentario">
-              <div class="row q-col-gutter-md q-mb-md">
-                <div class="col-xs-12 col-sm-6">
-                  <q-input
-                    outlined
-                    v-model="form.nombreComentario"
-                    label="Nombre"
-                    type="text"
-                    lazy-rules
-                    :rules="[rules.required]"
-                  />
+        <div key="text" class="tw-mt-9">
+          <img :src="noticia.portada" class="tw-h-auto tw-max-w-full" alt="No imagen found"/>
+        </div>
+        <div key="text" class="tw-mt-8 tw-text-base tw-leading-relaxed">
+          {{ noticia.descripcion }}
+        </div>
+
+        <!-- Comentarios -->
+        <div key="text2" class="tw-mt-28 tw-gap-6">
+          <div class="tw-text-xl tw-mb-4 tw-font-medium">
+            {{ comentarios.length }} Comentarios
+          </div>
+
+          <!-- Form -->
+          <q-card class="tw-mb-5" flat>
+            <q-card-section>
+              <q-form @submit="storeComentario">
+                <div class="row q-col-gutter-md q-mb-md">
+                  <div class="col-xs-12 col-sm-6">
+                    <q-input
+                      outlined
+                      v-model="form.nombreComentario"
+                      label="Nombre"
+                      type="text"
+                      lazy-rules
+                      :rules="[rules.required]"
+                    />
+                  </div>
+                  <div class="col-xs-12 col-sm-6">
+                    <q-input
+                      outlined
+                      v-model="form.correoComentario"
+                      label="Correo (no será publicado):"
+                      type="text"
+                      lazy-rules
+                      :rules="[rules.emailNotRequired]"
+                    />
+                  </div>
+                  <div class="tw-mt-2">
+                    Este sitio se reserva el derecho de la publicación de los comentarios. No se harán visibles aquellos
+                    que sean denigrantes, ofensivos, difamatorios, que estén fuera de contexto o atenten contra la
+                    dignidad de una persona o grupo social. Recomendamos brevedad en sus planteamientos.
+                  </div>
+                  <div class="col-xs-12 col-sm-12">
+                    <q-input
+                      outlined
+                      v-model="form.comentario"
+                      label="Comentario"
+                      type="textarea"
+                      lazy-rules
+                      :rules="[rules.required]"
+                    />
+                  </div>
                 </div>
-                <div class="col-xs-12 col-sm-6">
-                  <q-input
-                    outlined
-                    v-model="form.correoComentario"
-                    label="Correo (no será publicado):"
-                    type="text"
-                    lazy-rules
-                    :rules="[rules.emailNotRequired]"
-                  />
-                </div>
-                <div class="tw-mt-2">
-                  Este sitio se reserva el derecho de la publicación de los comentarios. No se harán visibles aquellos
-                  que sean denigrantes, ofensivos, difamatorios, que estén fuera de contexto o atenten contra la
-                  dignidad de una persona o grupo social. Recomendamos brevedad en sus planteamientos.
-                </div>
-                <div class="col-xs-12 col-sm-12">
-                  <q-input
-                    outlined
-                    v-model="form.comentario"
-                    label="Comentario"
-                    type="textarea"
-                    lazy-rules
-                    :rules="[rules.required]"
-                  />
-                </div>
+                <q-btn
+                  type="submit"
+                  color="primary"
+                  class="text-white">
+                  Enviar Comentario
+                </q-btn>
+              </q-form>
+            </q-card-section>
+          </q-card>
+
+          <div v-for="comentario in comentarios" :key="comentario.id"
+               class="tw-flex tw-flex-col tw-gap-2 tw-mb-6 tw-p-4  tw-rounded tw-bg-gray100 tw-border tw-border-gray200">
+            <div class="tw-mb-2">
+              <div class="tw-flex tw-items-center tw-gap-x-2">
+                <span class="tw-text-[16px] tw-font-medium">{{ comentario.nombre_comentario }}</span>
+                <span class="tw-text-gray500">dijo:</span>
               </div>
-              <q-btn
-                type="submit"
-                color="primary"
-                class="text-white">
-                Enviar Comentario
-              </q-btn>
-            </q-form>
-          </q-card-section>
-        </q-card>
-
-        <div v-for="comentario in comentarios" :key="comentario.id"
-             class="tw-flex tw-flex-col tw-gap-2 tw-mb-6 tw-p-4  tw-rounded tw-bg-gray100 tw-border tw-border-gray200">
-          <div class="tw-mb-2">
-            <div class="tw-flex tw-items-center tw-gap-x-2">
-              <span class="tw-text-[16px] tw-font-medium">{{ comentario.nombre_comentario }}</span>
-              <span class="tw-text-gray500">dijo:</span>
             </div>
-          </div>
-          <div class="tw-mb-4">
-            {{ comentario.comentario }}
-          </div>
-          <div class="tw-flex tw-items-center tw-gap-x-6">
-            {{ formatDate(comentario.fecha_creacion) }}
-            <div class="tw-flex tw-items-center tw-gap-x-1.5 tw-font-medium tw-cursor-pointer">
-              <q-icon name="reply"></q-icon>
-              Responder
+            <div class="tw-mb-4">
+              {{ comentario.comentario }}
+            </div>
+            <div class="tw-flex tw-items-center tw-gap-x-6">
+              {{ formatDate(comentario.fecha_creacion) }}
+              <div class="tw-flex tw-items-center tw-gap-x-1.5 tw-font-medium tw-cursor-pointer">
+                <q-icon name="reply"></q-icon>
+                Responder
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>

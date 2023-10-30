@@ -8,7 +8,7 @@
           <transition-group
             appear
             enter-active-class="animated fadeInDown slower"
-            leave-active-class="animated fadeInUp"
+            leave-active-class="animated fadeInOut"
           >
             <div key="text">
               <h1 class="title-font sm:tw-text-4xl tw-text-3xl tw-mb-4 tw-font-bold tw-text-gray-900">Before they sold
@@ -17,7 +17,7 @@
               </h1>
             </div>
             <div key="text">
-              <p class="tw-mb-4 tw-text-base tw-leading-relaxed">Copper mug try-hard pitchfork pour-over freegan
+              <p class="tw-mb-10 tw-text-base tw-leading-relaxed">Copper mug try-hard pitchfork pour-over freegan
                 heirloom
                 neutra air plant
                 cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic
@@ -25,7 +25,7 @@
             </div>
             <div key="text" class="tw-flex tw-justify-center">
               <button
-                class="tw-inline-flex tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-6 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-lg">
+                class="tw-inline-flex tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-6 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-lg ">
                 Saber Más
               </button>
             </div>
@@ -34,9 +34,9 @@
         <div class="lg:tw-max-w-lg lg:tw-w-full md:tw-w-1/2 tw-w-5/6">
           <transition
             appear
-            enter-active-class="animated fadeInRight slower delay-0.8s"
+            enter-active-class="animated fadeInUp slower delay-0.8s"
           >
-            <img class="tw-object-cover tw-object-center tw-rounded" alt="hero" src="img/heroSection.svg">
+            <img class="tw-object-cover tw-object-center tw-rounded" alt="hero" src="../../assets/img/heroSection.svg">
           </transition>
         </div>
       </div>
