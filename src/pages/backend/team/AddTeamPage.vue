@@ -26,7 +26,7 @@
                 :rules="[rules.numberGreaterZero]"
               >
                 <template v-slot:append>
-                  <q-icon name="report">
+                  <q-icon name="error">
                     <q-tooltip class="tw-text-[15px]">
                       Mientra sea menor el número mayor será la prioridad
                     </q-tooltip>

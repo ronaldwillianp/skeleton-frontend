@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-bg-primary tw-py-18 sm:tw-py-24 mt-10">
+  <div class="tw-bg-primary tw-py-10 sm:tw-py-12 mt-10">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8">
       <div class="tw-text-white tw-flex-1 lg:tw-flex tw-items-center tw-justify-between">
         <div class="tw-flex tw-flex-col tw-gap-y-4 tw-max-w-3xl">
