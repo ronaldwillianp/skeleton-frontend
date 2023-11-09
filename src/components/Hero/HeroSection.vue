@@ -7,8 +7,7 @@
           class="lg:tw-flex-grow md:tw-w-1/2 lg:tw-pr-24 md:tw-pr-16 tw-flex tw-flex-col md:tw-items-start md:tw-text-left tw-mb-16 md:tw-mb-0 tw-items-center tw-text-center">
           <transition-group
             appear
-            enter-active-class="animated fadeInDown slower"
-            leave-active-class="animated fadeInOut"
+            enter-active-class="animated fadeInUp slower"
           >
             <div key="text">
               <h1 class="title-font sm:tw-text-4xl tw-text-3xl tw-mb-4 tw-font-bold tw-text-gray-900">Before they sold
@@ -34,9 +33,9 @@
         <div class="lg:tw-max-w-lg lg:tw-w-full md:tw-w-1/2 tw-w-5/6">
           <transition
             appear
-            enter-active-class="animated fadeInUp slower delay-0.8s"
+            enter-active-class="animated fadeInUp slower"
           >
-            <img class="tw-object-cover tw-object-center tw-rounded" alt="hero" src="../../assets/img/heroSection.svg">
+            <img alt="hero" src="../../assets/img/heroSection.svg">
           </transition>
         </div>
       </div>

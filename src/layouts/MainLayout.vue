@@ -1,11 +1,7 @@
 <template>
   <q-ajax-bar color="positive" size="5px"/>
   <q-layout view="hHh lpR fFf">
-
-    <!--    <q-header elevated :style="'background-color: ' + useConfiguracionAdministracion.configuracionAdministracion.navbar_color_default">-->
     <q-header elevated>
-
-
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer"/>
 
@@ -13,10 +9,8 @@
           <span @click="router.push({path: '/'})">E.R.P. Skeleton</span>
         </q-toolbar-title>
 
-
         <q-avatar size="40px">
           <img src="../assets/quasar-logo-vertical.svg">
-
           <q-menu>
             <q-list dense style="min-width: 100px">
               <q-item clickable v-close-popup @click="router.push({path: '/profile'})">
@@ -69,7 +63,6 @@
             </q-list>
           </q-menu>
         </q-avatar>
-
 
       </q-toolbar>
     </q-header>

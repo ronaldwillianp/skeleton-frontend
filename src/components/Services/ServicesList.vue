@@ -1,5 +1,4 @@
 <template>
-
   <div v-show="servicios.length > 0" class="tw-bg-white tw-py-24 sm:tw-py-20">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-7 lg:px-8">
       <div class="tw-mx-auto tw-max-w-2xl lg:tw-text-center">

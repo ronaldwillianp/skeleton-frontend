@@ -3,11 +3,11 @@
     <div
       class="tw-mx-auto tw-grid tw-max-w-7xl tw-gap-x-8 tw-gap-y-20 tw-px-6 lg:tw-px-8 xl:tw-grid-cols-3"
     >
-      <div v-animate-onscroll.repeat="'animated fadeInDown slower'" class="tw-max-w-2xl">
+      <div v-animate-onscroll.repeat="'animated fadeInLeft slower'" class="tw-max-w-2xl">
         <h2 class="titleServices tw-text-3xl tw-font-bold tw-tracking-tight sm:tw-text-4xl">
           Conosca a nuestros directivos
         </h2>
-        <p v-animate-onscroll.repeat="'animated fadeInDown slower delay-0.7s'"
+        <p v-animate-onscroll.repeat="'animated fadeInLeft slower delay-0.7s'"
            class="subtitle tw-mt-6 tw-text-lg tw-leading-8 tw-text-gray-600">
           Libero fames augue nisl porttitor nisi, quis. Id ac elit odio vitae
           elementum enim vitae ullamcorper suspendisse.
@@ -17,7 +17,7 @@
         role="tw-list"
         class="tw-grid tw-gap-x-8 tw-gap-y-12 sm:tw-grid-cols-2 sm:tw-gap-y-16 xl:tw-col-span-2"
       >
-        <li v-animate-onscroll.repeat="'animated fadeInDown slower delay-0.9s'" class="teams"
+        <li v-animate-onscroll.repeat="'animated bounceIn slower delay-1s'" class="teams"
             v-for="person in directivos" :key="person.name">
           <div class=" tw-flex tw-tems-center tw-gap-x-6">
             <img class="tw-h-16 tw-w-16 tw-rounded-full" :src="person.imagen" alt=""/>

@@ -20,7 +20,7 @@
       <transition-group
         appear
         enter-active-class="animated fadeIn slower"
-        leave-active-class="animeted fadeOut slower"
+        leave-active-class="animated fadeOut slower"
       >
         <div key="text" class="tw-flex tw-items-center tw-gap-3">
           <div

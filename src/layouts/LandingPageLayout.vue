@@ -95,8 +95,9 @@
 
 <script setup>
 import EssentialLink from "src/components/EssentialLink.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
+const isLoading = ref(true)
 const rightDrawerOpen = ref(false);
 const navigation = [
   {name: "Product", href: "#"},
@@ -105,7 +106,10 @@ const navigation = [
   {name: "Company", href: "#"},
 ];
 
+
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 }
+
 </script>
+

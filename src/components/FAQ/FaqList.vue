@@ -2,24 +2,24 @@
   <div v-show="faqs.length > 0" class="tw-py-24 sm:tw-py-32">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8 lg:tw-text-center">
       <p
+        v-animate-onscroll.repeat="'animated fadeInDown slower'"
         class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
       >
         Preguntas Frecuentes
       </p>
     </div>
-    <div class="tw-mx-auto tw-max-w-3xl tw-px-6 lg:tw-px-8 md:tw-mt-14 tw-space-y-4">
+    <div class="tw-mt-4 tw-mx-auto tw-max-w-3xl tw-px-6 lg:tw-px-8 md:tw-mt-14 tw-space-y-4">
       <q-expansion-item
+         v-animate-onscroll.repeat="'animated fadeInDown slower delay-0.7s'"
         v-for="faq in faqs"
         :key="faq.id"
         expand-separator
         :label="faq.pregunta"
-        class="tw-text-base tw-border tw-border-gray-200 tw-rounded-lg tw-shadow-sm"
+        class="tw-text-base tw-border-l-2 tw-border-primary tw-shadow-md"
       >
-        <q-card class="tw-border-t tw-border-gray-200">
-          <q-card-section>
-           {{faq.respuesta}}
-          </q-card-section>
-        </q-card>
+        <div class="tw-p-4 tw-text-gray800">
+          {{ faq.respuesta }}
+        </div>
       </q-expansion-item>
     </div>
   </div>
@@ -35,7 +35,7 @@ onMounted(() => {
   getFAQ()
 })
 
-function getFAQ () {
+function getFAQ() {
   api.get('/social/faq/')
     .then(response => {
       faqs.value = response.data

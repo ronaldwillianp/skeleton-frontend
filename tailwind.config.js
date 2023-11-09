@@ -20,6 +20,7 @@ export default {
       gray200: '#e5e7eb',
       gray500: '#6b7280',
       gray600: '#4b5563',
+      gray800: '#374151',
       gray900: '#111827',
       slate200: '#e2e8f0'
     },
