@@ -10,6 +10,7 @@ export default {
       heroBg: '#D7F5DC',
       primary: '#20B15A',
       hoverPrimary: '#219F53',
+      hoverPrimaryClaro: 'rgba(181,215,189,0.68)',
       primaryClaro: '#D7F5DC',
       black: '#130F26',
       white: '#FFF',

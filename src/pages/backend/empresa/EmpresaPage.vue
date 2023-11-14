@@ -4,7 +4,8 @@
       <q-card-section class="text-center text-bold">{{ empresa.nombre }}</q-card-section>
     </q-card>
     <q-separator></q-separator>
-
+    <pre>
+    </pre>
   </div>
 </template>
 

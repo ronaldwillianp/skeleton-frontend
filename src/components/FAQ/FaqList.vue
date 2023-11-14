@@ -1,21 +1,15 @@
 <template>
   <div v-show="faqs.length > 0" class="tw-py-24 sm:tw-py-32">
     <div class="tw-mx-auto tw-max-w-7xl tw-px-6 lg:tw-px-8 lg:tw-text-center">
-      <p
-        v-animate-onscroll.repeat="'animated fadeInDown slower'"
-        class="tw-mt-2 tw-text-3xl tw-font-bold tw-tracking-tight tw-text-gray-900 sm:tw-text-4xl"
-      >
-        Preguntas Frecuentes
-      </p>
+      <TitleSection title="Preguntas Frecuentes"/>
     </div>
     <div class="tw-mt-4 tw-mx-auto tw-max-w-3xl tw-px-6 lg:tw-px-8 md:tw-mt-14 tw-space-y-4">
       <q-expansion-item
-         v-animate-onscroll.repeat="'animated fadeInDown slower delay-0.7s'"
+        v-animate-onscroll.repeat="'animated fadeInDown slower delay-0.7s'"
         v-for="faq in faqs"
         :key="faq.id"
-        expand-separator
         :label="faq.pregunta"
-        class="tw-text-base tw-border-l-2 tw-border-primary tw-shadow-md"
+        class="tw-text-base tw-border-l-2 tw-border-primary tw-rounded tw-shadow-md"
       >
         <div class="tw-p-4 tw-text-gray800">
           {{ faq.respuesta }}
@@ -28,6 +22,7 @@
 <script setup>
 import {api} from "boot/axios";
 import {ref, onMounted} from 'vue'
+import TitleSection from "components/TitleSection/TitleSection.vue";
 
 const faqs = ref([])
 
@@ -42,7 +37,3 @@ function getFAQ() {
     })
 }
 </script>
-
-<style scoped>
-
-</style>

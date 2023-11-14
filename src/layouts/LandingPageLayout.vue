@@ -1,5 +1,18 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <div v-if="isLoading">
+    <transition
+      appear
+      mode="out-in"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+    >
+      <div class="tw-flex tw-h-screen tw-justify-center tw-items-center">
+        <div class="loader"></div>
+      </div>
+    </transition>
+  </div>
+  <q-layout v-else view="hHh lpR fFf">
     <header class="tw-fixed tw-top-0 tw-right-0 tw-left-0 tw-bg-heroBg tw-z-50">
       <nav
         class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-px-7 md:tw-px-16 tw-container tw-mx-auto"
@@ -80,7 +93,7 @@
           <router-link
             to="/login"
             class="tw-text-sm tw-font-semibold tw-leading-6 tw-text-gray-900"
-          >Log in <span aria-hidden="true">&rarr;</span>
+          >Autenticarse <span aria-hidden="true">&rarr;</span>
           </router-link
           >
         </div>
@@ -95,9 +108,11 @@
 
 <script setup>
 import EssentialLink from "src/components/EssentialLink.vue";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
+import gsap from 'gsap';
 
 const isLoading = ref(true)
+const loader = ref(true)
 const rightDrawerOpen = ref(false);
 const navigation = [
   {name: "Product", href: "#"},
@@ -106,10 +121,94 @@ const navigation = [
   {name: "Company", href: "#"},
 ];
 
-
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
 }
 
+const beforeEnter = (el) => {
+  el.style.transform = 'translateY(-30px)'
+  el.style.opacity = 0
+}
+
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 3,
+    y: 0,
+    opacity: 1,
+    ease: 'bounce.out',
+    stagger: 1,
+    onComplete: done
+  })
+}
+
+const afterEnter = () => {
+  isLoading.value = false
+}
 </script>
+
+<style scoped>
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  display: grid;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  --c: no-repeat linear-gradient(#046D8B 0 0);
+  background: var(--c) 0 0,
+  var(--c) 100% 0,
+  var(--c) 100% 100%,
+  var(--c) 0 100%;
+  animation: l10-1 2s infinite linear,
+  l10-2 2s infinite linear;
+}
+
+.loader::after {
+  margin: 25%;
+  transform: scale(-1);
+}
+
+@keyframes l10-1 {
+  0% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0
+  }
+  12.5% {
+    background-size: 100% 4px, 4px 0, 0 4px, 4px 0
+  }
+  25% {
+    background-size: 100% 4px, 4px 100%, 0 4px, 4px 0
+  }
+  37.5% {
+    background-size: 100% 4px, 4px 100%, 100% 4px, 4px 0
+  }
+  45%,
+  55% {
+    background-size: 100% 4px, 4px 100%, 100% 4px, 4px 100%
+  }
+  62.5% {
+    background-size: 0 4px, 4px 100%, 100% 4px, 4px 100%
+  }
+  75% {
+    background-size: 0 4px, 4px 0, 100% 4px, 4px 100%
+  }
+  87.5% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 100%
+  }
+  100% {
+    background-size: 0 4px, 4px 0, 0 4px, 4px 0
+  }
+}
+
+@keyframes l10-2 {
+  0%, 49.9% {
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%
+  }
+  50%, 100% {
+    background-position: 100% 0, 100% 100%, 0 100%, 0 0
+  }
+}
+</style>
 

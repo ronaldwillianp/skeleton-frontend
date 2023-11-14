@@ -23,10 +23,7 @@
                 tumeric truffaut hexagon try-hard chambray.</p>
             </div>
             <div key="text" class="tw-flex tw-justify-center">
-              <button
-                class="tw-inline-flex tw-text-white tw-bg-primary tw-border-0 tw-py-2 tw-px-6 focus:tw-outline-none hover:tw-bg-hoverPrimary tw-rounded tw-text-lg ">
-                Saber Más
-              </button>
+            <ButtonBig label="Saber Más"/>
             </div>
           </transition-group>
         </div>
@@ -47,13 +44,7 @@
 <script setup>
 import {ref} from "vue";
 import ListSocios from "components/Socios/ListSocios.vue";
+import ButtonBig from "components/Buttons/ButtonBig/ButtonBig.vue";
 
-// const images = ref([
-//   {id: 1, src: '/img/clients/client-1.png'},
-//   {id: 2, src: '/img/clients/client-2.png'},
-//   {id: 3, src: '/img/clients/client-3.png'},
-//   {id: 4, src: '/img/clients/client-4.png'},
-//   {id: 5, src: '/img/clients/client-5.png'},
-// ])
 </script>
 
